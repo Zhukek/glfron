@@ -1,0 +1,47 @@
+@import "@/assets/styles/variables.scss";
+
+.splide__list {
+  gap: 1.56vw;
+  @media (max-width: $media) {
+    gap: 4vw;
+  }
+}
+.splide__slide {
+  margin-right: 1.563vw;
+  &:last-child {
+    margin-right: 0;
+  }
+  &-img {
+    border-radius: $border-radius;
+    @media (max-width: $media) {
+      border-radius: $border-radius-mobile;
+    }
+  }
+}
+
+.first {
+  height: 16.2vw;
+  @media (max-width: $media) {
+    height: 40.8vw;
+  }
+}
+
+.second {
+  height: 33.39vw;
+  @media (max-width: $media) {
+    height: 84.27vw;
+  }
+}
+
+.third {
+  height: 41.46vw;
+  @media (max-width: $media) {
+    height: 104.53vw;
+  }
+}
+.fourth {
+  height: 16.198vw;
+  @media (max-width: $media) {
+    height: 40.8vw;
+  }
+}

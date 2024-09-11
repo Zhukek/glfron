@@ -1,0 +1,78 @@
+@import "@/assets/styles/variables.scss";
+
+.background {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-color: $black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__h1 {
+    color: $gold;
+  }
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.56vw;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: $media) {
+    gap: 5.33vw;
+  }
+}
+.page {
+  &:first-child {
+    margin-top: 97.22vh;
+    background-color: $beige;
+    @media (max-width: $media) {
+    }
+  }
+  &:last-child {
+    margin-bottom: 1.56vw;
+    @media (max-width: $media) {
+      margin-bottom: 0;
+    }
+  }
+  margin-top: 1.56vw;
+  z-index: 1;
+  padding: 3.13vw;
+  width: 48.44vw;
+  background-color: white;
+  @media (max-width: $media) {
+    padding: 8vw 4vw;
+    width: 100%;
+  }
+  &__block {
+    margin-bottom: 3.33vw;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    @media (max-width: $media) {
+      margin-bottom: 10.67vw;
+    }
+  }
+  &-title {
+    margin-bottom: 2.08vw;
+    @media (max-width: $media) {
+      margin-bottom: 5.33vw;
+    }
+  }
+  &-text {
+    margin-bottom: 2.08vw;
+    @media (max-width: $media) {
+      margin-bottom: 5.33vw;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &-list {
+    margin-left: 0.83vw;
+    list-style-type: disc;
+    @media (max-width: $media) {
+      margin-left: 4.27vw;
+    }
+  }
+}

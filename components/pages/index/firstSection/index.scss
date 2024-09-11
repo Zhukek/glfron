@@ -1,0 +1,103 @@
+@import "@/assets/styles/variables.scss";
+.first {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100lvh;
+  justify-content: space-between;
+  position: relative;
+  padding-top: 0.52vw;
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: $media) {
+      margin-top: 5.33vw;
+    }
+    &-h1 {
+      padding: 0.78vw 0.68vw;
+      width: 66.72vw;
+      @media (max-width: $media) {
+        width: 69.6vw;
+        height: 35.2vw;
+      }
+      &-img {
+        width: 100%;
+        @media (max-width: $media) {
+          padding: unset;
+          height: unset;
+        }
+      }
+    }
+    &-h3 {
+      text-align: center;
+      width: 31.77vw;
+      @media (max-width: $media) {
+        width: 92vw;
+      }
+    }
+  }
+  &__basement {
+    position: absolute;
+    bottom: 3.125vw;
+  }
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 100%;
+    height: 100lvh;
+    &-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      will-change: width, height;
+      width: 26.04vw;
+      height: 18.22vw;
+      border-radius: 0.94vw;
+      @media (max-width: $media) {
+        transform: translate(-50%, -50%) scale(0.35, 0.34);
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &-title {
+      min-width: max-content;
+      height: 2.2vw;
+      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      @media (max-width: $media) {
+        width: 61.87vw;
+        height: 9.07vw;
+      }
+      &-h2 {
+        color: #fff;
+        line-height: 100%;
+        transform: translateY(3.8vw);
+        will-change: transform;
+        @media (max-width: $media) {
+          transform: translateY(10vw);
+        }
+      }
+    }
+    &-basement {
+      position: absolute;
+      bottom: 3.125vw;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      opacity: 0;
+      width: max-content;
+      @media (max-width: $media) {
+        bottom: 5.33vw;
+      }
+    }
+  }
+}

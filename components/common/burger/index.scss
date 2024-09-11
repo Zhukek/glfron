@@ -1,0 +1,44 @@
+@import "@/assets/styles/variables.scss";
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.burger {
+  position: absolute;
+  top: -1.07vw;
+  left: 0;
+  width: 8vw;
+  height: 2.13vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line {
+    transition: stroke $time ease-in-out;
+  }
+  display: none;
+  @media (max-width: $media) {
+    display: unset;
+  }
+}
+
+.x {
+  position: absolute;
+  top: -2.93vw;
+  left: 1.33vw;
+  width: 5.33vw;
+  height: 5.33vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  @media (max-width: $media) {
+    display: unset;
+  }
+}

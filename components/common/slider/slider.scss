@@ -1,0 +1,36 @@
+@import "@/assets/styles/variables.scss";
+
+.slider {
+  margin-top: 8vw;
+  height: 96vw;
+
+  &-slide {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &-h6 {
+      position: absolute;
+      left: 0;
+    }
+    .premium,
+    .select {
+      width: 19.17vw;
+      height: 32.03vw;
+      @media (max-width: $media) {
+        width: 50.67vw;
+        height: 84.27vw;
+      }
+    }
+    .elixir {
+      width: 15.42vw;
+      height: 25.73vw;
+
+      @media (max-width: $media) {
+        width: 40.53vw;
+        height: 68vw;
+        margin-top: 16.27vw;
+      }
+    }
+  }
+}

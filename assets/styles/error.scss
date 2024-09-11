@@ -1,0 +1,58 @@
+@import "@/assets/styles/variables.scss";
+.error {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("@/assets/imgs/404.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  @media (max-width: $media) {
+    text-align: center;
+    justify-content: unset;
+  }
+  &__title {
+    color: #ffffff;
+    @media (max-width: $media) {
+      margin-top: 45.33vw;
+    }
+  }
+  &__table {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 10.42vw;
+    position: absolute;
+    bottom: 0;
+    @media (max-width: $media) {
+      height: unset;
+      grid-template-columns: unset;
+      grid-template-rows: repeat(3, 1fr);
+    }
+    &-item {
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid #fff;
+      @media (max-width: $media) {
+        height: 20vw;
+        border-right: unset;
+        border-bottom: 1px solid #fff;
+      }
+      &:last-child {
+        border-right: unset;
+        @media (max-width: $media) {
+          border-bottom: unset;
+        }
+      }
+      @media (any-hover: hover) {
+        &:hover {
+          color: $gold;
+        }
+      }
+    }
+  }
+}

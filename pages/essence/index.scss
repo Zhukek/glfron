@@ -1,0 +1,297 @@
+@import "@/assets/styles/variables.scss";
+
+.hero {
+  background-image: url("@/assets/imgs/essence/main.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 350vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 0.52vw;
+  @media (max-width: $media) {
+    height: 513.867vw;
+    background-image: url("@/assets/imgs/essence/mainMoblie.webp");
+  }
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: $media) {
+      margin-top: 16.267vw;
+      gap: 5.6vw;
+    }
+    &-h1 {
+      padding: 0.78vw 0.68vw;
+      width: 66.72vw;
+      @media (max-width: $media) {
+        padding: 0;
+        width: 58vw;
+      }
+      &-img {
+        width: 100%;
+      }
+    }
+    &-h2 {
+      color: #fff;
+      text-align: center;
+      width: 34.48vw;
+      @media (max-width: $media) {
+        width: 92vw;
+      }
+    }
+  }
+  &__basement {
+    position: absolute;
+    top: 100lvh;
+    transform: translateY(-100%) translateY(-3.125vw);
+    display: flex;
+    flex-direction: column;
+    gap: 0.521vw;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: $media) {
+      gap: 2.667vw;
+      transform: translateY(-100%) translateY(-9.333vw);
+    }
+    &-img {
+      width: 4.167vw;
+      height: 4.167vw;
+      @media (max-width: $media) {
+        width: 16vw;
+        height: 16vw;
+      }
+    }
+    &-p {
+      color: #fff;
+      width: 30vw;
+      text-align: center;
+      @media (max-width: $media) {
+        width: calc(100% - 8vw);
+      }
+    }
+  }
+  &__cards {
+    width: 100%;
+    height: 100%;
+    &-item {
+      position: absolute;
+      &:nth-child(odd) {
+        left: 1.563vw;
+        @media (max-width: $media) {
+          left: 4vw;
+        }
+      }
+      &:nth-child(even) {
+        right: 1.563vw;
+        @media (max-width: $media) {
+          right: 4vw;
+        }
+      }
+      &:nth-child(1) {
+        top: 61.979vw;
+        @media (max-width: $media) {
+          top: 233.867vw;
+        }
+        .card-back__img {
+          width: 9.01vw;
+          height: 12.24vw;
+        }
+      }
+      &:nth-child(2) {
+        top: 113.958vw;
+        @media (max-width: $media) {
+          top: 289.867vw;
+        }
+        .card-back__img {
+          width: 9.01vw;
+          height: 8.906vw;
+        }
+      }
+      &:nth-child(3) {
+        top: 194.688vw;
+        @media (max-width: $media) {
+          top: 345.867vw;
+        }
+        .card-back__img {
+          width: 7.917vw;
+          height: 2.292vw;
+        }
+      }
+      &:nth-child(4) {
+        top: 250.938vw;
+        @media (max-width: $media) {
+          top: 401.867vw;
+        }
+        .card-back__img {
+          width: 9.01vw;
+          height: 12.24vw;
+        }
+      }
+      &:nth-child(5) {
+        top: 307.188vw;
+        @media (max-width: $media) {
+          top: 457.867vw;
+        }
+        .card-back__img {
+          width: 7.135vw;
+          height: 2.188vw;
+        }
+        .card-back__title {
+          margin-top: 0.417vw;
+        }
+      }
+    }
+  }
+}
+.culture {
+  margin-bottom: 10.417vw;
+  @media (max-width: $media) {
+    margin-bottom: 24vw;
+    margin-top: 0;
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @media (max-width: $media) {
+      grid-template-columns: unset;
+    }
+  }
+  &__left {
+    &-img {
+      width: 48.438vw;
+      height: 48.438vw;
+      border-radius: $border-radius;
+    }
+  }
+  &__center {
+    margin-left: 1.563vw;
+    &-list {
+      &-item {
+        width: max-content;
+        cursor: pointer;
+        &-active {
+          color: $brown;
+        }
+      }
+    }
+  }
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.302vw;
+  }
+  &__accordion {
+    display: none;
+    @media (max-width: $media) {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid $dark;
+    }
+
+    &-item {
+      @media (max-width: $media) {
+        overflow: hidden;
+        border-bottom: 1px solid $dark;
+        &-content {
+          transition: height 0.5s ease-in-out;
+        }
+      }
+      @media (any-hover: hover) {
+        &:hover {
+          .culture__accordion-item-header {
+            color: $brown;
+          }
+        }
+      }
+      &-active {
+        .culture__accordion-item-header {
+          color: $brown;
+        }
+      }
+      &-header {
+        @media (max-width: $media) {
+          padding: 5.33vw 0;
+        }
+      }
+      &-img {
+        @media (max-width: $media) {
+          width: 92vw;
+          height: 92vw;
+          margin-bottom: 10.66vw;
+        }
+      }
+      &-texts {
+        @media (max-width: $media) {
+          display: flex;
+          flex-direction: column;
+          gap: 4vw;
+        }
+      }
+    }
+  }
+}
+.final {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @media (max-width: $media) {
+    grid-template-columns: unset;
+    grid-template-rows: 1fr 1fr;
+  }
+  &__left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.563vw;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: $media) {
+      gap: 5.333vw;
+      order: 2;
+      justify-content: space-between;
+    }
+    &-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.563vw;
+      justify-content: space-between;
+      @media (max-width: $media) {
+        gap: 5.333vw;
+      }
+    }
+    &-subtitle {
+      color: $brown;
+    }
+    &-list {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      gap: 1.563vw;
+      @media (max-width: $media) {
+        gap: 5.333vw;
+        position: unset;
+        margin-bottom: 2.67vw;
+      }
+    }
+  }
+  &__right {
+    @media (max-width: $media) {
+      order: 1;
+    }
+    &-img {
+      width: 48.438vw;
+      height: 48.438vw;
+      border-radius: $border-radius;
+      @media (max-width: $media) {
+        width: 92vw;
+        height: 92vw;
+        border-radius: $border-radius-mobile;
+      }
+    }
+  }
+}

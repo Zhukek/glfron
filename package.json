@@ -1,0 +1,31 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --host",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/i18n": "^8.0.0",
+    "nuxt": "^3.9.0",
+    "vue": "^3.4.5",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6",
+    "@pinia/nuxt": "^0.5.1",
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
+    "@splidejs/vue-splide": "^0.6.12",
+    "@studio-freight/lenis": "^1.0.33",
+    "dotenv": "^16.4.5",
+    "gsap": "^3.12.5",
+    "pinia": "^2.1.7",
+    "sass": "^1.69.7",
+    "swiper": "^11.1.12",
+    "vue3-google-map": "^0.20.0"
+  }
+}

@@ -1,0 +1,18 @@
+@import "@/assets/styles/variables.scss";
+
+.marker {
+  cursor: pointer;
+  width: 0.99vw;
+  height: 1.41vw;
+  @media (max-width: $media) {
+    width: 9.333vw;
+    height: 13.333vw;
+  }
+  &-path {
+    fill: $dark;
+    &-active {
+      fill: $brown;
+      z-index: 2;
+    }
+  }
+}

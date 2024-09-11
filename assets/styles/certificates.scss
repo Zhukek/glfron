@@ -1,0 +1,121 @@
+@import "@/assets/styles/variables.scss";
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4.167vw;
+
+  @media (max-width: $media) {
+    gap: 21.333vw;
+
+    padding-bottom: 0;
+    margin-top: 0;
+  }
+  &__h1 {
+    margin-top: 5.729vw;
+    text-align: center;
+    @media (max-width: $media) {
+      margin-top: 25.333vw;
+    }
+  }
+  &__wrapper {
+    margin: 0 auto;
+
+    &-img {
+      height: 100%;
+      border-radius: $border-radius;
+      @media (max-width: $media) {
+        height: 100%;
+        width: 100%;
+        border-radius: $border-radius-mobile;
+      }
+    }
+  }
+}
+
+.certificates {
+  margin-bottom: 7.292vw;
+  @media (max-width: $media) {
+    margin-bottom: 8vw;
+  }
+  &__wrapper {
+    &-list {
+      display: flex;
+      flex-direction: column;
+      &-item {
+        padding: 1.042vw 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media (max-width: $media) {
+          padding: 6.667vw 4vw 8vw 4vw;
+        }
+        &:nth-child(odd) {
+          background-color: $toner;
+          margin: 0 -1.563vw;
+          padding: 1.042vw 1.563vw;
+          @media (max-width: $media) {
+            margin: 0 -4vw;
+            padding: 6.667vw 8vw 8vw 8vw;
+          }
+        }
+        &:hover {
+          .certificates__wrapper-list-item-btn {
+            display: flex;
+            @media (max-width: $media) {
+              display: none;
+            }
+          }
+        }
+        &-left {
+          display: flex;
+          align-items: center;
+          gap: 1.563vw;
+          @media (max-width: $media) {
+            gap: 8vw;
+          }
+          &-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.042vw;
+            @media (max-width: $media) {
+              gap: 5.333vw;
+            }
+          }
+        }
+        &-img {
+          width: 5.208vw;
+          height: 5.208vw;
+          @media (max-width: $media) {
+            align-self: flex-start;
+            width: 26.667vw;
+            height: 26.667vw;
+          }
+        }
+        &-title {
+          transform: translateY(0.156vw);
+        }
+        &-text {
+          display: none;
+          @media (max-width: $media) {
+            display: unset;
+          }
+        }
+        &-btn {
+          display: none;
+          justify-content: center;
+          align-items: center;
+          height: 2.604vw;
+          border: 1px solid $brown;
+          color: $brown;
+          width: 24.219vw;
+        }
+      }
+    }
+  }
+}
+.awards {
+  position: relative;
+}

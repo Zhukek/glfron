@@ -1,0 +1,95 @@
+@import "@/assets/styles/variables.scss";
+
+.background {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-color: $black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscribe {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  @media (max-width: $media) {
+    padding: 15px;
+    width: 100%;
+  }
+  &-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $beige;
+    margin-bottom: 80px;
+    &-img {
+      width: 89px;
+      height: 68px;
+      margin-bottom: 20px;
+    }
+    &-title {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    &-text {
+      text-align: center;
+      opacity: 0.5;
+    }
+  }
+  &-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &-input {
+      display: block;
+      margin: 0 auto 0.78vw auto;
+      width: 100%;
+
+      height: 0.99vw;
+      text-align: center;
+      background-color: $black;
+      color: #ffffff;
+      @media (max-width: $media) {
+        height: 4.27vw;
+        margin: 0 auto 2.67vw auto;
+      }
+      &::placeholder {
+        color: $beige;
+        opacity: 0.5;
+      }
+    }
+    &-hr {
+      width: 24.27vw;
+      height: 1px;
+      border: none;
+      background-color: $beige;
+      margin-bottom: 0;
+      @media (max-width: $media) {
+        width: 70.67vw;
+      }
+    }
+    &-wrap {
+      margin-top: 0.78vw;
+      height: 1.09vw;
+      @media (max-width: $media) {
+        margin-top: 2.67vw;
+      }
+      &-btn {
+        color: $gold;
+      }
+      &-ready {
+        margin-top: 0.78vw;
+        color: $beige;
+        opacity: 0.5;
+        @media (max-width: $media) {
+          margin-top: 2.67vw;
+        }
+      }
+    }
+  }
+}

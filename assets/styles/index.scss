@@ -1,0 +1,254 @@
+@import "@/assets/styles/variables.scss";
+
+// DEFAULT //
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+//SCROLLBAR//
+::-webkit-scrollbar {
+  width: 0;
+}
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  color: $dark;
+  cursor: default;
+}
+.no-scroll {
+  overflow-y: hidden;
+}
+.background-white {
+  background-color: $white;
+}
+.background-beige {
+  background-color: $beige;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: unset;
+  cursor: pointer !important;
+}
+button,
+label {
+  outline: none;
+  background-color: unset;
+  border: none;
+  cursor: pointer !important;
+  color: unset;
+}
+input,
+textarea,
+select {
+  appearance: none;
+  outline: none;
+  border: unset;
+  &:focus {
+    outline: none;
+  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+//LENIS//
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+// UI texts //
+.h1 {
+  font-family: "ArnoProSubhead";
+  font-size: 3.646vw;
+  font-weight: 400;
+  line-height: 3.281vw;
+  @media (max-width: $media) {
+    font-size: 13.33vw;
+    line-height: 12vw;
+  }
+}
+.h2 {
+  font-family: "ArnoPro";
+  font-size: 2.604vw;
+  font-weight: 400;
+  line-height: 2.344vw;
+  @media (max-width: $media) {
+    font-size: 9.33vw;
+    line-height: 8.27vw;
+  }
+}
+.h2-smallcaps {
+  font-family: "ArnoPro";
+  font-size: 2.604vw;
+  font-weight: 400;
+  line-height: 2.344vw;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  @media (max-width: $media) {
+    font-size: 9.33vw;
+    line-height: 8.27vw;
+  }
+}
+.grotesk {
+  font-family: "Pragmatica";
+  font-size: 1.354vw;
+  font-weight: 400;
+  line-height: 1.615vw;
+  @media (max-width: $media) {
+    font-size: 5.87vw;
+    line-height: 6.93vw;
+  }
+}
+.antique {
+  font-family: "ArnoPro";
+  font-size: 1.094vw;
+  font-weight: 400;
+  line-height: 1.302vw;
+  @media (max-width: $media) {
+    font-size: 4.8vw;
+    line-height: 5.87vw;
+  }
+}
+.greek-caption {
+  font-family: "ArnoPro";
+  font-size: 1.67vw;
+  font-weight: 400;
+  line-height: 1.51vw;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-feature-settings: "onum";
+  @media (max-width: $media) {
+    font-size: 6.4vw;
+    line-height: 5.87vw;
+  }
+}
+.caption {
+  font-family: "ArnoPro";
+  font-size: 1.09vw;
+  font-weight: 400;
+  line-height: 0.99vw;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-feature-settings: "onum";
+  @media (max-width: $media) {
+    font-size: 4.8vw;
+    line-height: 4.27vw;
+  }
+}
+
+.factoid {
+  font-family: "Pragmatica";
+  font-size: 3.13vw;
+  font-weight: 400;
+  line-height: 3.75vw;
+  letter-spacing: -0.02em;
+  @media (max-width: $media) {
+    font-size: 10.67vw;
+    line-height: 12.8vw;
+    letter-spacing: unset;
+  }
+}
+
+.link {
+  font-family: "Pragmatica";
+  font-size: 0.833vw;
+  font-weight: 400;
+  line-height: 0.989vw;
+  @media (max-width: $media) {
+    font-size: 3.73vw;
+    line-height: 4.53vw;
+  }
+}
+.underline {
+  text-decoration: underline;
+  text-underline-offset: 0.521vw;
+  text-decoration-thickness: 1px;
+  @media (max-width: $media) {
+    text-underline-offset: 2.67vw;
+  }
+}
+.pre-line {
+  white-space: pre-line;
+}
+.section {
+  padding: 1.563vw;
+  &-margin {
+    margin: calc(10.42vw - 1.56vw) 0;
+    padding: 0 1.563vw;
+    @media (max-width: $media) {
+      margin: 32vw 0;
+      padding: 4vw;
+    }
+  }
+  &:first-child,
+  &:last-child {
+    @media (max-width: $media) {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: $media) {
+    margin: 28vw 0;
+    padding: 4vw;
+  }
+  .title {
+    margin-bottom: 1.82vw;
+    @media (max-width: $media) {
+      margin-bottom: 5.33vw;
+    }
+  }
+}
+
+.desktop {
+  @media (max-width: $media) {
+    display: none !important;
+  }
+}
+.mobile {
+  display: none;
+  @media (max-width: $media) {
+    display: unset;
+  }
+}
+hr {
+  height: 1px;
+  border: none;
+  background-color: $dark;
+  margin-bottom: 3.13vw;
+  @media (max-width: $media) {
+    margin-bottom: 13.33vw;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $gold !important;
+}

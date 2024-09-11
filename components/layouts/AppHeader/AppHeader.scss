@@ -1,0 +1,212 @@
+@import "@/assets/styles/variables.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.563vw;
+  height: 3.125vw;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(219, 214, 213, 0);
+  will-change: transform;
+  transition: background-color $time, transform $time;
+
+  @media (max-width: $media) {
+    height: 13.33vw;
+    padding: 2.67vw 4vw;
+  }
+
+  &__open {
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 9;
+    position: fixed;
+    background-color: $white;
+    @media (max-width: $media) {
+      min-height: 150vw;
+    }
+    &-wrapper {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 0 1.56vw;
+      height: 100%;
+      margin-top: 1.04vw;
+      @media (max-width: $media) {
+        margin-top: 0;
+        grid-template-columns: 1fr;
+        padding: 13.33vw 4vw;
+        height: calc(100% - 3.33vw);
+      }
+    }
+    &-botl {
+      display: flex;
+      justify-content: center;
+      grid-column: span 2;
+      &-img {
+        align-self: center;
+        width: 24.9vw;
+        height: 39.79vw;
+      }
+      @media (max-width: $media) {
+        display: none;
+      }
+    }
+
+    &-menu {
+      margin: auto 0;
+      grid-column-start: 3;
+      display: flex;
+      flex-direction: column;
+      @media (max-width: $media) {
+        margin: auto;
+        text-align: center;
+        grid-column-start: unset;
+      }
+      &-el {
+        &:first-child {
+          margin-bottom: 2.24vw;
+          .header__open-menu-el-title {
+            margin-bottom: 1.09vw;
+            @media (max-width: $media) {
+              margin-bottom: 4.53vw;
+            }
+          }
+          .header__open-menu-el-list {
+            gap: 0.36vw;
+            @media (max-width: $media) {
+              margin-bottom: 12.8vw;
+              gap: 2.93vw;
+            }
+          }
+        }
+        &:nth-child(2) {
+          margin-bottom: 2.6vw;
+        }
+        &:last-child {
+          .header__open-menu-el-list {
+            margin-bottom: 0;
+          }
+        }
+        &-title {
+          opacity: 0.5;
+          margin-bottom: 0.78vw;
+          @media (max-width: $media) {
+            color: $brown;
+            opacity: 1;
+
+            margin-bottom: 3.2vw;
+          }
+        }
+        &-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.31vw;
+
+          @media (max-width: $media) {
+            align-items: center;
+            margin-bottom: 13.6vw;
+            gap: 2.4vw;
+          }
+          &-item {
+            width: max-content;
+            &-link {
+              transition: color $time;
+              @media (any-hover: hover) {
+                &:hover {
+                  color: $gold;
+                }
+              }
+            }
+            &-span {
+              color: $dark;
+              opacity: 0.3;
+            }
+          }
+        }
+      }
+    }
+    &-temperature {
+      display: none;
+      @media (max-width: $media) {
+        display: flex;
+        position: absolute;
+        bottom: 5.333vw;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      &-item {
+        display: flex;
+        gap: 1.07vw;
+      }
+    }
+  }
+  &-hide {
+    transform: translateY(-3.13vw);
+    @media (max-width: $media) {
+      transform: translateY(-13.33vw);
+    }
+  }
+  &-white {
+    background-color: $white;
+  }
+  &-beige {
+    background-color: $beige;
+  }
+
+  &-black {
+    background-color: $black;
+  }
+  &__temperature {
+    transition: color $smooth;
+  }
+
+  &__menu {
+    transition: color $smooth;
+    cursor: pointer;
+    position: relative;
+  }
+  &__logo {
+    transition: opacity $smooth;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.delay {
+  transition-delay: 1.7s;
+}
+.white {
+  color: #fff;
+}
+.black {
+  color: $dark;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+.header-enter-from,
+.header-leave-to {
+  transform: translateY(-100vh);
+}
+
+.header-enter-active,
+.header-leave-active {
+  transition: transform 1s cubic-bezier(1, 0, 0.34, 1);
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity $smoother ease-in-out;
+}
+
+.v-enter-active,
+.header-leave-active {
+  transition-delay: 1s;
+}

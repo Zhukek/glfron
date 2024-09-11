@@ -1,0 +1,25 @@
+@import "@/assets/styles/variables.scss";
+
+.annotation {
+  @media (max-width: $media) {
+    display: flex;
+    flex-direction: column;
+    padding: 2.67vw 2.67vw 5.33vw 2.67vw;
+    margin-bottom: 5.33vw;
+    border-radius: $border-radius-mobile;
+    border: 1px solid $gold;
+    color: $gold;
+  }
+  &-img {
+    @media (max-width: $media) {
+      align-self: center;
+      width: 21.33vw;
+      height: 21.33vw;
+    }
+  }
+  &-text {
+    @media (max-width: $media) {
+      text-align: center;
+    }
+  }
+}
