@@ -39,6 +39,7 @@
         class="media__container-slider"
         :modules="modules"
         :slidesPerView="3"
+        :slidesPerGroup="3"
         :spaceBetween="1"
         :navigation="{
           nextEl: '.next',
@@ -54,14 +55,10 @@
             <div class="media__container-slider-item-wrap">
               <img
                 class="media__container-slider-item-wrap-img"
-                src="@/assets/imgs/cover.jpg"
+                :src="item.img"
                 alt="Instagram post"
               />
             </div>
-
-            <h6 class="media__container-slider-item-title caption">
-              {{ item.type }}
-            </h6>
             <p class="media__container-slider-item-content grotesk pre-line">
               {{ item.content }}
             </p>
@@ -91,14 +88,11 @@
             <div class="media-mobile__slider-item-wrap">
               <img
                 class="media-mobile__slider-item-wrap-img"
-                src="@/assets/imgs/cover.jpg"
+                :src="item.img"
                 alt="Instagram post"
               />
             </div>
 
-            <h6 class="media-mobile__slider-item-title caption">
-              {{ item.type }}
-            </h6>
             <p class="media-mobile__slider-item-content grotesk pre-line">
               {{ item.content }}
             </p>
@@ -159,7 +153,6 @@ if (data.value)
   data.value.forEach((element) => {
     const item = {};
     item.img = element.media.src;
-    item.type = "News";
     item.content = element.content.split("\n\n")[0];
     item.date = element.date;
     item.link = element.url;
@@ -169,11 +162,11 @@ if (data.value)
 const activeSlide = ref(3);
 function prevSlide() {
   if (activeSlide.value === 3) return;
-  activeSlide.value--;
+  activeSlide.value -= 3;
 }
 function nextSlide() {
   if (activeSlide.value === news.length) return;
-  activeSlide.value++;
+  activeSlide.value += 3;
 }
 const getActiveSlide = computed(() => {
   if (activeSlide.value.toString().length < 2 && news.length > 9) {
