@@ -146,7 +146,7 @@
         </div>
       </div>
       <div class="final__right">
-        <img class="final__right-img" src="@/assets/imgs/essence/botl.webp" />
+        <img class="final__right-img" :src="imgFinal" alt="Bottle" />
       </div>
     </section>
   </main>
@@ -224,6 +224,7 @@ const { data: dataFamily } = await useAsyncData("family-page-s", () =>
 );
 const titleFinal = response.finalSection.title;
 const textAboveTitle = response.finalSection.textAboveTitle;
+const imgFinal = API_ROUTE + response.finalSection.img.data.attributes.url;
 const farmers = [];
 dataFamily.value.data.forEach((element) => {
   farmers.push({
@@ -233,7 +234,7 @@ dataFamily.value.data.forEach((element) => {
 });
 
 onMounted(() => {
-  console.log(response.card);
+  console.log(response);
 
   document.querySelectorAll(".card").forEach((card) => {
     gsap.to(card, {

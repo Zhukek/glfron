@@ -56,11 +56,11 @@
     <div class="header__open" v-show="isHeaderOpen">
       <Transition @after-enter="onAfterEnter" @after-leave="onAfterEnter">
         <div class="header__open-wrapper" v-if="isHeaderOpen">
-          <div class="header__open-botl">
+          <div class="header__open-">
             <img
-              class="header__open-botl-img"
+              class="header__open--img"
               :src="menuItems[0].items[activeImg].img"
-              alt="botl"
+              alt=""
             />
           </div>
           <div class="header__open-menu">

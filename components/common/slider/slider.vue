@@ -14,7 +14,7 @@
         }"
         class="slider-slide-img"
         :src="item.img"
-        alt="botl"
+        alt="Bottle"
       />
     </swiper-slide>
   </swiper>
