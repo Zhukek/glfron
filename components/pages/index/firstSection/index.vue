@@ -14,22 +14,22 @@
         />
       </h1>
       <h3 class="first__title-h3 h2">
-        Olive oil, which the Greeks themselves eat
+        {{ subtitle }}
       </h3>
     </div>
     <div class="first__basement">
-      <p class="caption">©2024. Greek Legend</p>
+      <p class="caption">{{ bottomTextBefore }}</p>
     </div>
     <div class="first__background">
       <img
         class="first__background-img"
-        src="@/assets/imgs/background.webp"
+        :src="firstBackground"
         alt="Olive branches"
       />
       <div class="first__background-title">
-        <h2 class="first__background-title-h2 h2">Real, Olive, Yours</h2>
+        <h2 class="first__background-title-h2 h2">{{ slogan }}</h2>
       </div>
-      <p class="first__background-basement caption">Born in Greece</p>
+      <p class="first__background-basement caption">{{ bottomTextAfter }}</p>
     </div>
   </section>
 </template>
@@ -42,8 +42,28 @@ gsap.registerPlugin(ScrollTrigger);
 import { useHeaderStateStore } from "@/stores/headerState";
 const headerStateStore = useHeaderStateStore();
 
-import { useRouter } from "vue-router";
-const router = useRouter();
+defineProps({
+  subtitle: {
+    type: String,
+    required: true,
+  },
+  bottomTextBefore: {
+    type: String,
+    required: true,
+  },
+  slogan: {
+    type: String,
+    required: true,
+  },
+  bottomTextAfter: {
+    type: String,
+    required: true,
+  },
+  firstBackground: {
+    type: String,
+    required: true,
+  },
+});
 const firstSection = ref(null);
 onMounted(() => {
   animationFirst();

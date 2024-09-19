@@ -9,7 +9,7 @@
           third: index === 2,
           fourth: index === 3,
         }"
-        :src="slide.img"
+        :src="slide"
       />
     </SplideSlide>
   </Splide>

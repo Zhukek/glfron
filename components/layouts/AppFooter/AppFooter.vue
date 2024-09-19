@@ -15,7 +15,7 @@
           />
         </div>
         <h2 class="footer__title-h2 h2">
-          Olive oil, which the Greeks themselves eat
+          {{ subtitle }}
         </h2>
       </div>
 
@@ -36,9 +36,7 @@
             id="mce-EMAIL"
             required=""
             :placeholder="
-              isDesktopStore.isDesktop
-                ? `Write your e'mail to subscribe the news`
-                : `E'mail to subscribe the news`
+              isDesktopStore.isDesktop ? emailHint : emailHintMobile
             "
             v-model="email"
           />
@@ -70,17 +68,17 @@
       <div class="footer__developed">
         <a
           class="footer__developed-link antique"
-          href="https://www.google.ru/maps/place/Greek+Legend/@35.3195208%2C25.1303778%2C17z/data=%214m7%213m6%211s0x149a598c3d30758d:0xad4c252c83f5f1c6%218m2%213d35.3195208%214d25.1329527%2115sCkxQcm9kdWNlZCBHcmVlayBMZWdlbmQgSS5LLkUuIDI0NSBMIElPTklBUyBIRVJBS0xJT04gQ1JFVEUgR1JFRUNFLCBQLkMuIDcxMzA2kgEQY29ycG9yYXRlX29mZmljZeABAA%2116s%2Fg%2F11vjrnd9vl?entry=tts"
+          :href="officeAddressLink"
           target="_blank"
-          title="Tefeli, Heraklion, Crete, Greece, P.C. 70010"
+          :title="officeAddress"
         >
-          Tefeli, Heraklion, Crete, Greece, P.C. 70010
+          {{ officeAddress }}
         </a>
       </div>
       <div class="footer__legend footer__block">
         <h6 class="footer__block-h6 caption">Legend</h6>
         <p class="footer__block-p antique">
-          Copyright © 2024 Greek Legend <br />
+          {{ copyright }} <br />
           <nuxt-link to="/privacy-policy" title="Privacy Policy">
             Privacy Policy
           </nuxt-link>
@@ -118,6 +116,23 @@
 <script setup>
 import { useIsDesktopStore } from "@/stores/isDesktop";
 const isDesktopStore = useIsDesktopStore();
+
+const config = useRuntimeConfig();
+const API_ROUTE = config.public.api_route;
+
+const { data } = await useAsyncData("footer", () =>
+  $fetch(API_ROUTE + "/api/footer?populate=deep")
+);
+const response = data.value.data.attributes;
+
+const subtitle = response.subtitle;
+const emailHint = response.emailHint;
+const emailHintMobile = response.emailHintMobile;
+const officeAddress = response.officeAddress;
+const officeAddressLink = response.officeAddressLink;
+const copyright = response.copyright;
+
+// Subscribe //
 const email = ref("");
 const regEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 const isEmailValid = computed(() => {

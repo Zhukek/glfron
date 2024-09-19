@@ -18,7 +18,7 @@
           {{ family.name }}
         </div>
         <div class="families__content-mobile-block-subtitle greek-caption">
-          {{ family.subtitle }}
+          {{ family.greekName }}
         </div>
         <div class="families__content-mobile-block-text grotesk">
           {{ family.text }}
@@ -68,7 +68,7 @@
             v-html="families[activeIndex].name"
           ></h1>
           <h2 class="families__right-title-h2 greek-caption">
-            {{ families[activeIndex].subtitle }}
+            {{ families[activeIndex].greekName }}
           </h2>
         </div>
         <div class="families__block">
@@ -90,11 +90,13 @@
 
 <script setup>
 import Annotation from "@/components/common/annotation/index.vue";
-import { useIsDesktopStore } from "@/stores/isDesktop";
-const isDesktopStore = useIsDesktopStore();
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+
+import { useIsDesktopStore } from "@/stores/isDesktop";
+const isDesktopStore = useIsDesktopStore();
+
 onMounted(animationSliderFamily);
 function animationSliderFamily() {
   ScrollTrigger.matchMedia({
@@ -177,32 +179,12 @@ const activeIndex = ref(0);
 function changeFamilyIndex(index) {
   activeIndex.value = index;
 }
-import chatzigeorgiou from "@/assets/imgs/families/chatzigeorgiou.webp";
-import voutaktakis from "@/assets/imgs/families/voutaktakis.webp";
-import papadakis from "@/assets/imgs/families/papadakis.webp";
-const families = [
-  {
-    name: "Family \nChatzigeorgiou",
-    subtitle: "Χατζηγεωργίου",
-    text: "Dimos enjoys spending his free time spearfishing, enjoying the gifts of the sea.",
-    link: "/chatzigeorgiou",
-    img: chatzigeorgiou,
+defineProps({
+  families: {
+    type: Array,
+    required: true,
   },
-  {
-    name: "Family \nVoutaktakis",
-    subtitle: "Βουτακτάκης ",
-    text: "Giannis takes pleasure in horseback. horseback riding around his property in his spare time, which helps him to unwind and reenergize.",
-    link: "/voutaktakis",
-    img: voutaktakis,
-  },
-  {
-    name: "Family \nPapadakis",
-    subtitle: "Παπαδάκης",
-    text: "Kostis's free time is spent with his family and friends. This time with loved ones gives him the energy he needs for his demanding work.",
-    link: "/papadakis",
-    img: papadakis,
-  },
-];
+});
 </script>
 
 <style lang="scss" scoped>

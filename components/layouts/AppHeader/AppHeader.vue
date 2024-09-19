@@ -117,6 +117,8 @@ import { useHeaderStateStore } from "~/stores/headerState";
 const headerStateStore = useHeaderStateStore();
 import { useIsDesktopStore } from "~/stores/isDesktop";
 const isDesktopStore = useIsDesktopStore();
+
+// Header settings (color, position) //
 const isHeaderShow = ref(true);
 const isWhite = computed(() => headerStateStore.getIsColorWhite);
 const isHeaderOpen = computed(() => headerStateStore.getIsOpen);
@@ -133,30 +135,7 @@ watch(isHeaderOpen, (newValue) => {
     isHeaderClosing.value = false;
   }, 1700);
 });
-const isMounted = ref(false);
 
-onMounted(() => {
-  window.addEventListener("scroll", handleScrollPosition);
-  changeIsDesktop();
-  window.addEventListener("resize", changeIsDesktop);
-  isMounted.value = true;
-});
-function handleScrollPosition() {
-  onTop.value = scrollPosition() <= 0;
-  if (scrollPosition() < lastScroll.value) {
-    isHeaderShow.value = true;
-  } else if (headerStateStore.getCanHeaderChange) {
-    isHeaderShow.value = false;
-  }
-  lastScroll.value = scrollPosition();
-}
-function changeIsDesktop() {
-  if (window.innerWidth > 769) {
-    isDesktopStore.changeIsDesktop(true);
-  } else {
-    isDesktopStore.changeIsDesktop(false);
-  }
-}
 const getLogoColor = computed(() => {
   if (isWhite.value && !isHeaderOpen.value) {
     return "white";
@@ -191,16 +170,25 @@ function openMenu() {
     headerStateStore.openHeader();
   }
 }
-
 const getHeaderMenu = computed(() => {
   return isHeaderOpen.value ? "Close menu" : "Menu";
 });
 
-// MENU ITEMS //
-import premiumChatzigeorgiou from "@/assets/imgs/bottles/premiumChatzigeorgiou500.png";
-import premiumVoutaktakis from "@/assets/imgs/bottles/premiumVoutaktakis500.png";
-import premiumPapadakis from "@/assets/imgs/bottles/premiumPapadakis500.png";
+const config = useRuntimeConfig();
+const API_ROUTE = config.public.api_route;
 
+const { data: dataHeader } = await useAsyncData("header-menu", () =>
+  $fetch(API_ROUTE + "/api/header-menu?populate=deep")
+);
+
+// MENU ITEMS //
+const response = dataHeader.value.data.attributes;
+const premiumChatzigeorgiou =
+  API_ROUTE + response.chatzigeorgiouBottleImg.data.attributes.url;
+const premiumVoutaktakis =
+  API_ROUTE + response.voutaktakisBottleImg.data.attributes.url;
+const premiumPapadakis =
+  API_ROUTE + response.papadakisBottleImg.data.attributes.url;
 const menuItems = [
   {
     title: "Families",
@@ -259,16 +247,39 @@ function changeActiveImg(index) {
   }
 }
 // TEMPERATURE //
-const config = useRuntimeConfig();
 const weatherApiKey = config.public.wheather;
-const { data } = await useAsyncData("wheather", () =>
+const { data: dataWeather } = await useAsyncData("wheather", () =>
   $fetch(
     `http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=Heraklion&aqi=no`
   )
 );
-const temperatureCelsius = Math.round(data.value?.current.temp_c);
+const temperatureCelsius = Math.round(dataWeather.value?.current.temp_c);
 const temperature =
   (temperatureCelsius > 0 ? "+" : "") + temperatureCelsius + "°C in Heraklion";
+
+const isMounted = ref(false);
+onMounted(() => {
+  window.addEventListener("scroll", handleScrollPosition);
+  changeIsDesktop();
+  window.addEventListener("resize", changeIsDesktop);
+  isMounted.value = true;
+});
+function changeIsDesktop() {
+  if (window.innerWidth > 769) {
+    isDesktopStore.changeIsDesktop(true);
+  } else {
+    isDesktopStore.changeIsDesktop(false);
+  }
+}
+function handleScrollPosition() {
+  onTop.value = scrollPosition() <= 0;
+  if (scrollPosition() < lastScroll.value) {
+    isHeaderShow.value = true;
+  } else if (headerStateStore.getCanHeaderChange) {
+    isHeaderShow.value = false;
+  }
+  lastScroll.value = scrollPosition();
+}
 </script>
 
 <style lang="scss" scoped>

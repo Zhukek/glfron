@@ -1,28 +1,32 @@
 <template>
   <main>
-    <FirstSection />
+    <FirstSection
+      :subtitle
+      :bottomTextBefore
+      :slogan
+      :bottomTextAfter
+      :firstBackground
+    />
 
     <section class="section about">
       <div class="about__left">
         <img
           class="about__left-img"
-          src="@/assets/imgs/about.webp"
+          :src="secondSectionImg"
           alt="olive farmer"
         />
       </div>
       <div class="about__right">
         <div class="about__block">
           <p class="about__right-text grotesk">
-            We proudly introduce you to our exquisite extra virgin olive oil
-            crafted by families on the island of Crete. For over a century,
-            these families have honored traditions in creating.
+            {{ topText }}
           </p>
           <nuxt-link
             title="About"
             to="/about"
             class="about__right-link link underline"
           >
-            Go read about page
+            {{ linkText }}
           </nuxt-link>
         </div>
         <p class="about__right-caption h1">Greece</p>
@@ -33,13 +37,10 @@
         />
         <div class="about__block">
           <h6 class="about__right-title antique">
-            The production of olive oil
+            {{ bottomTitle }}
           </h6>
           <p class="about__right-text antique">
-            Nestled in Greece, 350+ farmers devote themselves to crafting
-            exceptional olive oil. Their dedication has spawned three distinct
-            categories: Premium, Select, and Elixirio, each with its unique
-            essence.
+            {{ bottomText }}
           </p>
         </div>
       </div>
@@ -54,7 +55,9 @@
           v-for="(card, index) in listProducts"
           :key="index"
         >
-          <h6 class="products__card-title antique pre-line">{{ card.name }}</h6>
+          <h6 class="products__card-title antique pre-line">
+            {{ card.name + "\n" + card.capacity }}
+          </h6>
           <img
             class="products__card-img"
             :src="card.img"
@@ -67,12 +70,12 @@
       </div>
     </section>
 
-    <FamilySlider />
+    <FamilySlider :families />
     <div class="section video">
-      <h6 class="video-text antique">How we produce olive oil</h6>
+      <h6 class="video-text antique">{{ videoDescription }}</h6>
       <img
         class="video-img"
-        src="@/assets/imgs/video.jpg"
+        :src="videoBackground"
         alt="How we produce olive oil"
       />
     </div>
@@ -88,32 +91,58 @@ import MediaResourses from "@/components/pages/index/media/index.vue";
 import { useHeaderStateStore } from "@/stores/headerState";
 const headerStateStore = useHeaderStateStore();
 
-
 onMounted(() => {
   headerStateStore.changeLogoShow(false);
   headerStateStore.changeCanHeaderChange(false);
   headerStateStore.changeColorToWhite(false);
 });
+const config = useRuntimeConfig();
+const API_ROUTE = config.public.api_route;
 
-// IMPORT ASSETS PRODUCTS //
-import premium from "@/assets/imgs/bottles/premiumVoutaktakis500.png";
-import select from "@/assets/imgs/bottles/selectPapadakis500.png";
-import elixir from "@/assets/imgs/bottles/elixirChatzigeorgiou.png";
-
-const listProducts = [
-  {
-    name: "Premium \n250, 500, 750 ml",
-    img: premium,
-  },
-  {
-    name: "Select \n250, 500 ml",
-    img: select,
-  },
-  {
-    name: "Elixirio \n250 ml",
-    img: elixir,
-  },
-];
+const { data } = await useAsyncData("main-page", () =>
+  $fetch(API_ROUTE + "/api/main-page?populate=deep")
+);
+const response = data.value.data.attributes;
+// FIRST SECTION
+const subtitle = response.firstSection.subtitle;
+const bottomTextBefore = response.firstSection.bottomTextBefore;
+const slogan = response.firstSection.slogan;
+const bottomTextAfter = response.firstSection.bottomTextAfter;
+const firstBackground =
+  API_ROUTE + response.firstSection.background.data.attributes.url;
+// SECOND SECTION
+const secondSectionImg =
+  API_ROUTE + response.secondSection.img.data.attributes.url;
+const topText = response.secondSection.topText;
+const linkText = response.secondSection.linkText;
+const bottomTitle = response.secondSection.bottomTitle;
+const bottomText = response.secondSection.bottomText;
+// PRODUCTS SECTION
+const listProducts = [];
+response.products.forEach((product) => {
+  const item = {
+    name: product.title,
+    capacity: product.capacity,
+    img: API_ROUTE + product.bottleImg.data.attributes.url,
+  };
+  listProducts.push(item);
+});
+// FAMILIES SECTION
+const families = [];
+response.families.forEach((family) => {
+  const item = {
+    name: "Family \n" + family.name,
+    greekName: family.greekName,
+    text: family.description,
+    link: "/" + family.name.toLowerCase(),
+    img: API_ROUTE + family.photo.data.attributes.url,
+  };
+  families.push(item);
+});
+// VIDEO SECTION
+const videoDescription = response.videoSection.text;
+const videoBackground =
+  API_ROUTE + response.videoSection.background.data.attributes.url;
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";

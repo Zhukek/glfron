@@ -1,0 +1,626 @@
+@import "@/assets/styles/variables.scss";
+
+.main {
+  &__h1 {
+    margin-top: 5.73vw;
+    margin-bottom: 0.78vw;
+    text-align: center;
+    @media (max-width: $media) {
+      margin-top: 29.33vw;
+      margin-bottom: 2.67vw;
+    }
+  }
+  &__h2 {
+    margin-bottom: 4.69vw;
+    text-align: center;
+    color: $gold;
+    @media (max-width: $media) {
+      margin-bottom: 21.33vw;
+    }
+  }
+  &__wrapper {
+    margin: 0 auto;
+    width: 31.61vw;
+    height: 31.61vw;
+    @media (max-width: $media) {
+      width: 92vw;
+      height: 92vw;
+    }
+    &-img {
+      width: 100%;
+      height: 100%;
+      border-radius: $border-radius;
+
+      @media (max-width: $media) {
+        border-radius: $border-radius-mobile;
+      }
+    }
+  }
+}
+.harvest {
+  position: relative;
+
+  &-points {
+    position: absolute;
+    top: 41.6vw;
+    display: flex;
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 30.67vw;
+      height: 30.67vw;
+      border-radius: 100%;
+      border: 1px solid $gold;
+      color: $gold;
+      padding-top: 0.8vw;
+    }
+  }
+  &-timeline {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3.65vw;
+    width: 100%;
+    position: relative;
+    @media (max-width: $media) {
+      margin-bottom: 53.33vw;
+      width: unset;
+      overflow-x: scroll;
+      height: 17.33vw;
+      justify-content: unset;
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &-line {
+      width: 19.38vw;
+      height: 1px;
+      background-color: $dark;
+      display: flex;
+      align-items: center;
+      @media (max-width: $media) {
+        width: 12.8vw;
+      }
+    }
+    &-year {
+      width: 19.38vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      @media (max-width: $media) {
+        width: 44.8vw;
+      }
+      @media (any-hover: hover) {
+        &:hover {
+          .harvest-timeline-year-line {
+            background-color: $gold;
+          }
+          .harvest-timeline-year-value {
+            color: $gold;
+          }
+          .harvest-timeline-year-vertical {
+            display: unset;
+          }
+          .harvest-timeline-year-points {
+            display: flex;
+          }
+        }
+      }
+      &-active {
+        .harvest-timeline-year-line {
+          background-color: $gold;
+        }
+        .harvest-timeline-year-value {
+          color: $gold;
+        }
+        .harvest-timeline-year-vertical {
+          display: unset;
+        }
+        .harvest-timeline-year-points {
+          display: flex;
+        }
+      }
+      &-line {
+        width: 100%;
+        height: 1px;
+        background-color: $dark;
+        &-disable {
+          background-color: $dark !important;
+        }
+        @media (max-width: $media) {
+          width: 23.73vw;
+        }
+      }
+      &-value {
+        padding: 0.26vw 0.52vw;
+        background-color: $beige;
+        z-index: 2;
+        @media (max-width: $media) {
+          padding: 2.67vw;
+        }
+      }
+      &-vertical {
+        display: none;
+        z-index: 1;
+        background-color: $gold;
+        width: 1px;
+        height: 4.01vw;
+        position: absolute;
+        top: -0.94vw;
+        left: 50%;
+        @media (max-width: $media) {
+          top: 0;
+          height: 17.33vw;
+        }
+      }
+      &-points {
+        display: none;
+        position: absolute;
+        transform: translateY(-100%);
+        &-item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          width: 6.25vw;
+          height: 6.25vw;
+          border-radius: 100%;
+          border: 1px solid $gold;
+          color: $gold;
+          padding-top: 0.16vw;
+        }
+      }
+    }
+  }
+  &__cards {
+    display: flex;
+    height: 26.042vw;
+  }
+  &__card {
+    border-right: 0.052vw solid;
+    position: relative;
+    width: 32.292vw;
+    display: flex;
+    justify-content: space-around;
+    &:first-child {
+      .harvest__card-title {
+        left: 0;
+      }
+      .harvest__card-img {
+        align-self: flex-end;
+        width: 16.25vw;
+        height: 26.04vw;
+      }
+    }
+    &-title {
+      top: 0;
+      position: absolute;
+      left: 1.563vw;
+    }
+    &:nth-child(2) {
+      .harvest__card-img {
+        align-self: flex-end;
+        width: 14.69vw;
+        height: 24.38vw;
+      }
+    }
+    &:last-child {
+      border-right: unset;
+      .harvest__card-img {
+        width: 11.88vw;
+        height: 19.79vw;
+        align-self: flex-end;
+        @media (max-width: $media) {
+          width: 29.07vw;
+          height: 80vw;
+        }
+      }
+    }
+  }
+}
+.about {
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    @media (max-width: $media) {
+      display: flex;
+      flex-direction: column;
+      gap: 10.67vw;
+    }
+  }
+  &__left {
+    grid-column: span 2;
+    width: 48.44vw;
+    height: 48.44vw;
+    @media (max-width: $media) {
+      grid-column: unset;
+      width: 92vw;
+      height: 92vw;
+    }
+    &-img {
+      width: 100%;
+      height: 100%;
+      border-radius: $border-radius;
+      @media (max-width: $media) {
+        border-radius: $border-radius-mobile;
+      }
+    }
+  }
+  &__center {
+    margin-left: 1.56vw;
+    grid-column: 3/3;
+    position: relative;
+    @media (max-width: $media) {
+      grid-column: unset;
+      order: 2;
+      margin-left: 0;
+    }
+    &-title {
+      margin-bottom: 0.52vw;
+      @media (max-width: $media) {
+        margin-bottom: 2.67vw;
+      }
+    }
+    &-subtitle {
+      color: $gold;
+    }
+    .voutaktakis {
+      position: absolute;
+      top: -1vw;
+      left: 0;
+      width: 16.98vw;
+      height: 10.68vw;
+
+      @media (max-width: $media) {
+        top: -16vw;
+        left: -2vw;
+        width: 86.93vw;
+        height: 54.67vw;
+      }
+    }
+    .chatzigeorgiou {
+      position: absolute;
+      top: -1vw;
+      left: 2vw;
+      width: 12.86vw;
+      height: 9.48vw;
+
+      @media (max-width: $media) {
+        top: -5vw;
+        left: 0;
+        width: 64.27vw;
+        height: 46.93vw;
+      }
+    }
+    .papadakis {
+      position: absolute;
+      top: -1vw;
+      left: 5vw;
+      width: 11.15vw;
+      height: 4.17vw;
+      @media (max-width: $media) {
+        top: 0;
+        left: unset;
+        right: 5.33vw;
+        width: 57.07vw;
+        height: 21.33vw;
+      }
+    }
+  }
+  &__right {
+    grid-column: 4/4;
+    @media (max-width: $media) {
+      grid-template-columns: unset;
+    }
+    &-text {
+      margin-bottom: 1.3vw;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      @media (max-width: $media) {
+        margin-bottom: 4vw;
+      }
+      &-lead {
+        margin-bottom: 4.17vw;
+        @media (max-width: $media) {
+          margin-bottom: 10.67vw;
+        }
+      }
+    }
+  }
+}
+.farm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.78vw;
+  padding-top: 0;
+  @media (max-width: $media) {
+    padding-top: unset;
+  }
+  &-block {
+    position: relative;
+  }
+  &-img {
+    width: 100%;
+    border-radius: $border-radius;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @media (max-width: $media) {
+      height: 92vw;
+      object-fit: cover;
+      border-radius: $border-radius-mobile;
+    }
+  }
+  &-caption {
+    position: absolute;
+    bottom: 1.56vw;
+    left: 1.56vw;
+    display: flex;
+    gap: 0.52vw;
+    @media (max-width: $media) {
+      bottom: 4vw;
+      left: 4vw;
+    }
+    &-right {
+      right: 1.56vw;
+      left: unset;
+    }
+
+    &-item {
+      padding: 1.56vw 1.56vw 1.25vw 1.56vw;
+      background-color: $beige;
+      border-radius: $border-radius;
+      @media (max-width: $media) {
+        padding: 4vw 4vw 2.93vw 4vw;
+        border-radius: $border-radius-mobile;
+      }
+      &:nth-child(2) {
+        @media (max-width: $media) {
+          display: none;
+        }
+      }
+    }
+    &-img {
+      border-radius: $border-radius;
+      width: 22.66vw;
+      height: 15.63vw;
+      object-fit: cover;
+      @media (max-width: $media) {
+        border-radius: $border-radius-mobile;
+      }
+    }
+  }
+}
+.production {
+  &-radio {
+    display: flex;
+    gap: 0.52vw;
+    margin-bottom: 1.56vw;
+    height: 2.29vw;
+    @media (max-width: $media) {
+      gap: 2.67vw;
+      margin-right: -4vw;
+      margin-left: -4vw;
+
+      margin-bottom: 5.33vw;
+      overflow-x: scroll;
+      height: unset;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    &-btn {
+      display: flex;
+      justify-content: center;
+      border: 1px solid $dark;
+      border-radius: 2.6vw;
+      width: 7.24vw;
+      height: 2.6vw;
+      padding: 0.83vw 1.46vw 0.73vw 1.46vw;
+      @media (max-width: $media) {
+        border-radius: 13.33vw;
+        width: 34.93vw;
+        height: 11.47vw;
+        padding: 3.73vw 8vw 3.2vw 8vw;
+      }
+      &-active {
+        background-color: $dark;
+        color: $beige;
+      }
+      &:first-child {
+        @media (max-width: $media) {
+          margin-left: 4vw;
+        }
+      }
+      @media (any-hover: hover) {
+        &:hover {
+          background-color: $dark;
+          color: $beige;
+        }
+      }
+      &-label {
+        margin-top: 0.16vw;
+      }
+    }
+    &-input {
+      display: none;
+    }
+  }
+  &-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 32.03vw;
+    @media (max-width: $media) {
+      height: unset;
+      display: flex;
+      flex-direction: column;
+    }
+    &-model {
+      position: relative;
+      border-right: 1px solid $dark;
+      display: flex;
+      justify-content: space-between;
+      @media (max-width: $media) {
+        border-right: unset;
+        width: 100%;
+        height: 111.73vw;
+      }
+      .premium,
+      .select {
+        width: 19.27vw;
+        height: 32.03vw;
+        align-self: flex-end;
+        @media (max-width: $media) {
+          width: 50.67vw;
+          height: 84.27vw;
+        }
+      }
+
+      .elixir {
+        width: 15.42vw;
+        height: 25.73vw;
+        align-self: flex-end;
+        @media (max-width: $media) {
+          width: 40.53vw;
+          height: 68vw;
+        }
+      }
+      &-img {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        @media (max-width: $media) {
+          margin-bottom: 13.07vw;
+        }
+      }
+    }
+    &-options {
+      margin-left: 1.56vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      &-view {
+        display: flex;
+        flex-direction: column;
+        &-item {
+          font-variant: all-small-caps;
+          width: max-content;
+          &:hover,
+          &-active {
+            color: $brown;
+          }
+        }
+      }
+      &-text {
+        &-item {
+          margin-bottom: 1.3vw;
+        }
+      }
+    }
+
+    &-accordion {
+      &-item {
+        border-bottom: 1px solid $dark;
+        padding: 5.33vw 0;
+        transition: height 0.5s ease-in-out;
+        overflow-y: hidden;
+        &:first-child {
+          border-top: 1px solid $dark;
+        }
+
+        &-title {
+          &-active {
+            color: $brown;
+          }
+        }
+        &-text {
+          margin-top: 5.33vw;
+          margin-bottom: 0.78vw;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.accreditation {
+  padding-top: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  @media (max-width: $media) {
+    display: flex;
+    flex-direction: column;
+    gap: 10.67vw;
+  }
+  &__column {
+    &:first-child {
+      grid-column: span 2;
+    }
+    &:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      gap: 1.04vw;
+      margin-left: 1.56vw;
+      @media (max-width: $media) {
+        margin-left: 0;
+        order: 3;
+        gap: 5.33vw;
+      }
+    }
+    &-title {
+      width: 13.28vw;
+      @media (max-width: $media) {
+        text-align: center;
+        width: 100%;
+        order: 2;
+      }
+    }
+    &-icon {
+      @media (max-width: $media) {
+        display: flex;
+        justify-content: center;
+        order: 1;
+      }
+      &-img {
+        width: 7.81vw;
+        height: 7.81vw;
+        @media (max-width: $media) {
+          width: 32vw;
+          height: 32vw;
+        }
+      }
+    }
+    &-text {
+      margin-bottom: 1.56vw;
+      @media (max-width: $media) {
+        margin-bottom: 4vw;
+      }
+      &:last-child {
+        margin-bottom: unset;
+      }
+      &-lead {
+        margin-bottom: 4.17vw;
+        @media (max-width: $media) {
+          margin-bottom: 10.67vw;
+        }
+      }
+    }
+    &-img {
+      border-radius: $border-radius;
+      width: 48.44vw;
+      height: 48.44vw;
+      @media (max-width: $media) {
+        width: 92vw;
+        height: 92vw;
+        border-radius: $border-radius-mobile;
+      }
+    }
+  }
+}
+.autoslider {
+  padding: 0;
+}

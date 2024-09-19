@@ -1,12 +1,16 @@
 <template>
   <main>
-    <section class="first" ref="section">
+    <section
+      class="first"
+      ref="section"
+      :style="{ 'background-image': `url(${background})` }"
+    >
       <div class="first__title">
-        <h1 class="h2">Welcome to Greek Legend</h1>
+        <h1 class="h2">{{ mainText }}</h1>
       </div>
       <div class="first__basement">
         <p class="caption">
-          Crafting Premium Olive Oil from the Heart of Greece
+          {{ bottomText }}
         </p>
       </div>
     </section>
@@ -16,9 +20,10 @@
           <div class="table__item-value factoid">
             {{ item.value }}
             <img
+              v-if="item.plusAfterNumber"
               class="table__item-value-plus"
               src="@/assets/imgs/plus.svg"
-              alt="plus"
+              alt="Plus"
             />
           </div>
           <div class="table__item-title antique">{{ item.title }}</div>
@@ -31,7 +36,7 @@
       <div class="partnership__content">
         <div class="partnership__left">
           <video class="partnership__left-img" autoplay loop muted playsinline>
-            <source src="@/assets/imgs/video_bottles.mp4" type="video/mp4" />
+            <source :src="partnershipVideo" type="video/mp4" />
           </video>
         </div>
 
@@ -110,7 +115,7 @@
             v-for="(item, index) in difference"
           >
             <div class="difference__content-item-title caption">
-              {{ item[0] }}
+              {{ item.title }}
             </div>
             <div class="difference__content-item-blocks">
               <div class="difference__content-item-block">
@@ -118,7 +123,7 @@
                   Greek Legend
                 </div>
                 <div class="difference__content-item-block-text antique">
-                  {{ item[1] }}
+                  {{ item.greeklegend }}
                 </div>
               </div>
 
@@ -127,7 +132,7 @@
                   Other brands
                 </div>
                 <div class="difference__content-item-block-text antique">
-                  {{ item[2] }}
+                  {{ item.other }}
                 </div>
               </div>
             </div>
@@ -135,7 +140,7 @@
 
           <div class="difference__accreditation">
             <h6 class="difference__accreditation-title greek-caption">
-              Greek Legend guarantee and quality control
+              {{ qualityControl }}
             </h6>
             <div class="difference__accreditation-icon">
               <img
@@ -161,12 +166,10 @@
         <div class="products__right">
           <div class="products__right-instruction">
             <p class="products__right-instruction-text grotesk">
-              Hover over the last name of one of our 3 farmers to view the
-              products
+              {{ instructionsTopText }}
             </p>
             <p class="products__right-instruction-text antique">
-              If you click on the last name, you will be taken to the farmer's
-              page
+              {{ instructionsBottomText }}
             </p>
           </div>
           <div class="products__right-families">
@@ -193,9 +196,7 @@
               />
             </div>
             <div class="products__right-info-text antique">
-              Premium, Select, and Elixirio, each with its unique essence. 250,
-              500, 750. Their dedication has spawned three distinct categories:
-              Premium, Select, and Elixirio.
+              {{ productsBottomText }}
             </div>
           </div>
         </div>
@@ -226,60 +227,49 @@
         </div>
       </div>
     </section>
-    <Capacities />
+
+    <Capacities
+      :hint="leftHintText"
+      :factoriesListProp
+      :apiKey
+      :captionAboveOwnerPhoto
+    />
     <section class="section section-margin ceo">
       <h2 class="title h2-smallcaps">Appeal CEO</h2>
       <div class="ceo__content">
         <div class="ceo__left">
-          <img
-            class="ceo__left-img"
-            src="@/assets/imgs/ceo/ceo.webp"
-            alt="CEO Greek Legend"
-          />
+          <img class="ceo__left-img" :src="photo" alt="CEO Greek Legend" />
         </div>
         <div class="ceo__center">
-          <p class="ceo__center-title grotesk">
-            Chatzigiorgis <br />
-            Georgios
+          <p class="ceo__center-title pre-line grotesk">
+            {{ name }}
           </p>
-          <p class="ceo__center-subtitle caption">χατζηγιωργησ</p>
-          <img
-            class="ceo__center-img"
-            src="@/assets/imgs/ceo/signature.svg"
-            alt="Βουτακτάκης"
-          />
+          <p class="ceo__center-subtitle caption">{{ greekName }}</p>
+          <img class="ceo__center-img" :src="signature" alt="Βουτακτάκης" />
           <p class="ceo__center-info antique">CEO Greek Legend</p>
           <a
-            href="mailto: ceo@greeklegend.gr"
+            :href="'mailto: ' + email"
             class="ceo__center-email antique"
-            title="ceo@greeklegend.gr"
-            >ceo@greeklegend.gr</a
+            :title="email"
+            >{{ email }}</a
           >
         </div>
         <div class="ceo__right">
-          <h6 class="ceo__right-title h2">Dear Guests!</h6>
+          <h6 class="ceo__right-title h2">{{ bigText }}</h6>
           <p class="ceo__right-text ceo__right-text-lead grotesk">
-            «Greek Legend is Greek olive oil with a unique concept. At its core
-            lies the management of crop quality and the absence of blending
-            olive oil from different regions, farmers, and seasons. This allows
-            olive producers from Greece to present their own product jointly
-            with Greek Legend as olive oil on the international market, in its
-            authentic form with original flavor characteristics.»
+            {{ mediumText }}
           </p>
-          <p class="ceo__right-text antique">
-            Our mission is to produce and deliver extra virgin olive oil to you
-            the way the Greeks themselves eat it. When buying GREEK LEGEND olive
-            oil, you've turned to GOOD FRIENDS!
+          <p
+            class="ceo__right-text antique"
+            v-for="(text, index) in smallTexts"
+            :key="index"
+          >
+            {{ text }}
           </p>
-          <p class="ceo__right-text antique">
-            First and foremost, Greek Legend is about the friendship among
-            individuals who have united under one brand and want their voices to
-            be heard, allowing others to experience the diversity of taste that
-            has been crafted here, on the island of Crete, in Greece.
-          </p>
+
           <p class="ceo__right-text caption">
-            HAVE A GOOD APPETITE! <br />
-            (ΚΑΛΉ ΌΡΕΞΗ!)
+            {{ caption }} <br />
+            {{ greekCaption }}
           </p>
         </div>
       </div>
@@ -290,10 +280,9 @@
 import Annotation from "@/components/common/annotation/index.vue";
 import Capacities from "@/components/pages/about/index.vue";
 
-import { useIsDesktopStore } from "@/stores/isDesktop";
-const isDesktopStore = useIsDesktopStore();
 import { useHeaderStateStore } from "@/stores/headerState";
 const headerStateStore = useHeaderStateStore();
+
 const section = ref(null);
 const heightSection = ref(null);
 onMounted(() => {
@@ -302,9 +291,6 @@ onMounted(() => {
   headerStateStore.changeColorToWhite(true);
   heightSection.value = section.value.offsetHeight;
   window.addEventListener("scroll", handleScroll);
-});
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
 });
 function handleScroll() {
   if (window.pageYOffset > heightSection.value) {
@@ -315,107 +301,116 @@ function handleScroll() {
     headerStateStore.changeColorToWhite(true);
   }
 }
-const table = [
-  {
-    value: "350",
-    title: "Families",
-  },
-  {
-    value: "125 000",
-    title: "Threes",
-  },
-  {
-    value: "5 000",
-    title: "Tons of olives",
-  },
-  {
-    value: "1 000",
-    title: "Tons of olive oil",
-  },
-  {
-    value: "3 million",
-    title: "Square meters",
-  },
-];
-const partnership = [
-  {
-    text: "What is the cooperation between olive growers and the Greek legend about?",
-    list: [
-      "Reducing equipment and fertilizer Costs for olive production",
-      "Contractual and proprietary standards-based product quality management",
-      "Developing a strong brand identity that resonates with target consumers and differentiates the product from competitors.",
-      "Extra income!",
-    ],
-    // btn: { text: "Submit an application", link: "/" },
-  },
-  {
-    text: "What does the brand give to the end consumer?",
-    list: [
-      "Olive oil eaten by the Greeks themselves",
-      "Olive Oil made with the original, time-tested technology",
-      "A natural product that is packed with vitamins, antioxidants, and other essential nutrients.",
-      "The unparalleled flavor and fragrance of genuine Greek olive oil, which has the power to transform any meal into something special.",
-    ],
-    // btn: { text: "See where the olive oil is sold", link: "/" },
-  },
-];
-const difference = [
-  [
-    "Olive production",
-    "Made with care and attention to detail, following rigorous quality control procedures",
-    "The process of growing, harvesting, and processing the crop depends mainly on the human factor.",
-  ],
-  [
-    "Harvesting",
-    "The collection process is provided with modern equipment and human resources, and proper conditions for transportation to the plant are ensured.",
-    "The low level of optimization of raw material collection and transportation leads to untimely delivery for processing.",
-  ],
-  [
-    "Olive oil squeeze",
-    "Urgent and high-quality olive processing at an authorized plant. Our production technology excludes mixing of olive oil produced by different manufacturers in different seasons.",
-    "Often produced at the nearest plant on a first-come, first-served basis, which negatively affects the speed and quality of production, and is mixed with olive oils from other manufacturers to achieve normal acidity.",
-  ],
-  [
-    "Packaging",
-    "The olive oil from different families is bottled separately. Each bottle has a photo and the last name of the farmer who participated in the production.",
-    "The majority of products are sold to trading and procurement companies, which either package or resell the goods wholesale.",
-  ],
-  [
-    "Transportation",
-    "The thermocontainer ensures that the temperature remains constant.",
-    "Transportation of the product using accessible methods.",
-  ],
-  [
-    "End-customer communication",
-    "Omnichannel customer support system",
-    "Lack of a client platform",
-  ],
-];
-import chatzigeorgiou from "@/assets/imgs/families/chatzigeorgiouProducts.webp";
-import voutaktakis from "@/assets/imgs/families/voutaktakisProducts.webp";
-import papadakis from "@/assets/imgs/families/papadakisProducts.webp";
-const families = [
-  {
-    name: "Chatzigeorgiou",
-    img: chatzigeorgiou,
-    link: "/chatzigeorgiou",
-  },
-  {
-    name: "Voutaktakis",
-    img: voutaktakis,
-    link: "/voutaktakis",
-  },
-  {
-    name: "Papadakis",
-    img: papadakis,
-    link: "/papadakis",
-  },
-];
+
+const config = useRuntimeConfig();
+const API_ROUTE = config.public.api_route;
+const apiKey = config.public.maps;
+
+const { data } = await useAsyncData("about-page", () =>
+  $fetch(API_ROUTE + "/api/about-page?populate=deep")
+);
+const response = data.value.data.attributes;
+// FIRST SECTION //
+const background = API_ROUTE + response.background.data.attributes.url;
+const mainText = response.mainText;
+const bottomText = response.bottomText;
+// TABLE //
+const table = [];
+response.table.cell.forEach((cell) => {
+  const item = {
+    value: cell.number,
+    title: cell.title,
+    plusAfterNumber: cell.plusAfterNumber,
+  };
+  table.push(item);
+});
+// PARTNERSHIP //
+const partnershipVideo =
+  API_ROUTE + response.partnership.video.data.attributes.url;
+const partnership = [];
+response.partnership.rightColumnRow.forEach((row) => {
+  const item = {
+    list: row.answer.split("\n\n"),
+    text: row.question,
+  };
+  partnership.push(item);
+});
+//  DIFFERENCE //
+const difference = [];
+response.difference.row.forEach((row) => {
+  const item = {
+    title: row.title,
+    greeklegend: row.greekLegend,
+    other: row.otherBrands,
+  };
+  difference.push(item);
+});
+const qualityControl = response.difference.qualityControl;
+// PRODUCTS //
+const instructionsTopText = response.products.rightColumn.instructionsTopText;
+const instructionsBottomText =
+  response.products.rightColumn.instructionsBottomText;
+const productsBottomText = response.products.rightColumn.bottomText;
+const families = [];
+response.products.familyProduct.forEach((product) => {
+  const item = {
+    name: product.familyName,
+    img: API_ROUTE + product.img.data.attributes.url,
+    link: "/" + product.familyName.toLowerCase(),
+  };
+  families.push(item);
+});
 const familyActiveIndex = ref(0);
 function changeFamily(index) {
   familyActiveIndex.value = index;
 }
+// CAPACITIES //
+const leftHintText = response.capacities.leftHintText;
+const captionAboveOwnerPhoto = response.capacities.captionAboveOwnerPhoto;
+const factoriesListProp = [];
+response.capacities.factory.forEach((factory) => {
+  const item = {
+    text: factory.factoryName,
+    isActive: false,
+    isOpen: false,
+    type: factory.type,
+    option: {
+      position: {
+        lat: factory.coordinatesLatitude,
+        lng: factory.coordinatesLongitude,
+      },
+    },
+    description: factory.description,
+    img: API_ROUTE + factory.factoryPhoto.data.attributes.url,
+    owner: {
+      img: API_ROUTE + factory.factoryOwnerPhoto.data.attributes.url,
+      name: factory.factoryOwnerName,
+      description: factory.ownerQuote,
+    },
+  };
+  factoriesListProp.push(item);
+});
+
+// CEO //
+const photo = API_ROUTE + response.ceo.photo.data.attributes.url;
+const name = formatName(response.ceo.name);
+const greekName = response.ceo.greekName;
+const email = response.ceo.email;
+const signature = API_ROUTE + response.ceo.signature.data.attributes.url;
+const bigText = response.ceo.bigText;
+const mediumText = response.ceo.mediumText;
+const smallTexts = response.ceo.smallText.split("\n\n");
+const caption = response.ceo.caption;
+const greekCaption = response.ceo.greekCaption;
+
+function formatName(fullName) {
+  const [firstName, lastName] = fullName.split(" ");
+  return `${firstName}\n${lastName}`;
+}
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 <style lang="scss" scoped>
-@import "./about.scss";
+@import "./index.scss";
 </style>

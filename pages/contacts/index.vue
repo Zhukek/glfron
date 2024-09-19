@@ -24,10 +24,10 @@
           {{ item.title }}
         </div>
         <div
-          class="info__block-text"
+          class="info__block-text pre-line"
           :class="{
-            grotesk: item.isTextGrotesk,
-            antique: !item.isTextGrotesk,
+            grotesk: item.title,
+            antique: !item.title,
           }"
           v-html="item.text"
         ></div>
@@ -40,8 +40,9 @@
           <li
             class="info__distribution-list-item"
             v-for="(item, index) in distribution"
+            :key="index"
           >
-            {{ item }}
+            {{ item.country + ": " + item.email }}
           </li>
         </ul>
       </div>
@@ -54,47 +55,62 @@ import Marker from "@/components/common/marker/index.vue";
 import { GoogleMap, CustomMarker } from "vue3-google-map";
 import cusomization from "@/assets/contactsMap.json";
 import { useHeaderStateStore } from "@/stores/headerState";
-import { useIsDesktopStore } from "@/stores/isDesktop";
-const isDesktopStateStore = useIsDesktopStore();
 const headerStateStore = useHeaderStateStore();
 const center = ref({ lat: 35.091402, lng: 25.161928 });
+
 const config = useRuntimeConfig();
 const apiKey = config.public.maps;
+const API_ROUTE = config.public.api_route;
 
+const { data } = await useAsyncData("contacts-page", () =>
+  $fetch(API_ROUTE + "/api/contact?populate=deep")
+);
+const response = data.value.data.attributes;
+const markers = [{ position: { lat: 35.091402, lng: 25.161928 } }];
+
+const distribution = [];
+response.countries.forEach((country) => {
+  const item = {
+    country: country.countryName,
+    email: country.countryEmail,
+  };
+  distribution.push(item);
+});
+const phone = response.phone;
+const email = response.email;
+const officeAddress = response.officeAddress;
+const departments = [];
+response.departments.forEach((department) => {
+  const item = {
+    text: department.row,
+  };
+  departments.push(item);
+});
+const infoList = [
+  {
+    title: "Office",
+    text: officeAddress,
+  },
+  {
+    text: `Telephone: <a href='tel:${deleteSpaces(
+      phone
+    )}' title='${deleteSpaces(phone)}'>${phone}</a> <br />E’mail: ${email}`,
+  },
+  {
+    text: "",
+  },
+];
+infoList[2].text = departments.map((item) => item.text).join("\n");
+function deleteSpaces(str) {
+  return str.replace(/\s+/g, "");
+}
 onMounted(() => {
   headerStateStore.changeColorToWhite(false);
   headerStateStore.changeCanHeaderChange(false);
   headerStateStore.changeLogoShow(true);
 });
-const markers = [{ position: { lat: 35.091402, lng: 25.161928 } }];
-const infoList = [
-  {
-    title: "Office",
-    text: "Tefeli, Heraklion, Crete, Greece, P.C. 70010",
-    isTextGrotesk: true,
-  },
-  {
-    text: "Telephone: <a href='tel:+306939508953' title='+306939508953'>+30 693 950 8953</a> <br />E’mail: info@greeklegend.gr",
-    isTextGrotesk: false,
-  },
-  {
-    text: "PR Depratement: pr@greeklegend.gr <br />CEO: ceo@greeklegend.gr<br />Purchasing and distribution: info@greeklegend.gr",
-    isTextGrotesk: false,
-  },
-];
-const distribution = [
-  "USA: info-us@greeklegend.gr",
-  "Israel: info-il@greeklegend.gr",
-  "Switzerland: info-ch@greeklegend.gr",
-  "Finland: info-fi@greeklegend.gr",
-  "Germany: info-de@greeklegend.gr",
-  "Poland: info-pl@greeklegend.gr",
-  "China: info-ch@greeklegend.gr",
-  "Russia: info-ru@greeklegend.gr",
-  "Kazakhstan: info-kz@greeklegend.gr",
-];
 </script>
 
 <style lang="scss" scoped>
-@import "./contacts.scss";
+@import "./index.scss";
 </style>

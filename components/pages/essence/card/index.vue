@@ -2,11 +2,7 @@
   <div class="card">
     <div class="card-front" @click="openPopup">
       <div class="card-front__title">
-        <Climat class="card-front__title-img" v-if="title === 'The sun'" />
-        <Drops class="card-front__title-img" v-if="title === 'Water and sea'" />
-        <Nature class="card-front__title-img" v-if="title === 'Climat'" />
-        <Soil class="card-front__title-img" v-if="title === 'Nature'" />
-        <Sun class="card-front__title-img" v-if="title === 'The soil'" />
+        <img class="card-front__title-img" :src="iconWhite" :alt="title" />
 
         <h6 class="card-front__title-h6 caption">{{ title }}</h6>
       </div>
@@ -19,7 +15,7 @@
     </div>
     <div class="card-back desktop">
       <div class="card-back-row">
-        <img class="card-back__img" :src="reversedImg" :alt="reversedImgAlt" />
+        <img class="card-back__img" :src="reversedImg" :alt="reversedTitle" />
         <p class="card-back__title caption">{{ reversedTitle }}</p>
       </div>
 
@@ -46,31 +42,7 @@
             </svg>
           </div>
           <div class="card-popup__icon">
-            <Climat
-              class="card-popup__icon-img"
-              :color="'#8C4318'"
-              v-if="title === 'The sun'"
-            />
-            <Drops
-              class="card-popup__icon-img"
-              :color="'#8C4318'"
-              v-if="title === 'Water and sea'"
-            />
-            <Nature
-              class="card-popup__icon-img"
-              :color="'#8C4318'"
-              v-if="title === 'Climat'"
-            />
-            <Soil
-              class="card-popup__icon-img"
-              :color="'#8C4318'"
-              v-if="title === 'Nature'"
-            />
-            <Sun
-              class="card-popup__icon-img"
-              :color="'#8C4318'"
-              v-if="title === 'The soil'"
-            />
+            <img class="card-popup__icon-img" :src="iconBrown" :alt="title" />
             <h6 class="card-popup__icon-h6 caption">{{ title }}</h6>
           </div>
           <p class="card-popup__text greek-caption">{{ text }}</p>
@@ -79,9 +51,7 @@
               <img
                 class="card-popup__content-row-img"
                 :src="reversedImg"
-                :alt="reversedImgAlt"
-                :width="widthVw"
-                :height="heightVw"
+                :alt="reversedTitle"
               />
               <h5
                 class="card-popup__content-row-title caption pre-line"
@@ -98,24 +68,19 @@
   </div>
 </template>
 <script setup>
-import Climat from "@/assets/imgs/essence/icons/climat.vue";
-import Drops from "@/assets/imgs/essence/icons/drops.vue";
-import Nature from "@/assets/imgs/essence/icons/nature.vue";
-import Soil from "@/assets/imgs/essence/icons/soil.vue";
-import Sun from "@/assets/imgs/essence/icons/sun.vue";
 import { useIsPopupOpen } from "@/stores/isPopupOpen";
 const isPopupOpenStore = useIsPopupOpen();
+
 const props = defineProps({
   title: { type: String, require: true },
   text: { type: String, require: true },
+  iconWhite: { type: String, require: true },
+  iconBrown: { type: String, require: true },
   reversedTitle: { type: String, require: true },
   reversedImg: { type: String, require: true },
-  reversedImgAlt: { type: String, require: true },
   reversedText: { type: String, require: true },
   customClass: { type: String, default: "" },
   lastChild: { type: Boolean, default: false },
-  widthVw: { type: Number, require: true },
-  heightVw: { type: Number, require: true },
 });
 
 const popupIsOpen = ref(false);

@@ -101,50 +101,21 @@ function animationIndustry() {
   });
 }
 
-// IMPORT BACKGROUNDS INDUSTRY BLOCK //
-import first from "@/assets/imgs/industry/1.webp";
-import second from "@/assets/imgs/industry/2.webp";
-import third from "@/assets/imgs/industry/3.webp";
-import fourth from "@/assets/imgs/industry/4.webp";
-import fifth from "@/assets/imgs/industry/5.webp";
-import sixth from "@/assets/imgs/industry/6.webp";
-
-const industryList = [
-  {
-    title: "Our work is based on the standards set out in the contracts.",
-    img: first,
-    text: "Harvest period: 10/2024-11/2024",
-  },
-  {
-    title: "Optimization of olive harvesting and delivery to olive oil mills.",
-    img: second,
-    text: "24 hours in warm seasons and 48 hours in cold seasons for timely delivery.",
-  },
-  {
-    title: "Assurance of high-quality and timely olive processing.",
-    img: third,
-    text: "Under the supervision of our specialists at the certified Greek Legend factory.",
-  },
-  {
-    title:
-      "Mixture of olive oil obtained in different seasons and manufacturers is excluded.",
-    img: fourth,
-
-    text: "Authentic Greek olive oil is unmixed for high quality.",
-  },
-  {
-    title:
-      "Each producer's olive oil is stored separately, with access for both us and the farmer.",
-    img: fifth,
-    text: "Secure high-tech olive oil storage facilities.",
-  },
-  {
-    title:
-      "We've created an efficient global olive oil transport system, reaching directly to store shelves.",
-    img: sixth,
-    text: "Transportation by authorized companies, transportation control.",
-  },
-];
+const config = useRuntimeConfig();
+const API_ROUTE = config.public.api_route;
+const { data } = await useAsyncData("family-page-industry", () =>
+  $fetch(API_ROUTE + `/api/family-page-changing-the-industry?populate=deep`)
+);
+const response = data.value.data.attributes;
+const industryList = [];
+response.slide.forEach((slide) => {
+  const item = {
+    title: slide.title,
+    img: API_ROUTE + slide.background.data.attributes.url,
+    text: slide.caption,
+  };
+  industryList.push(item);
+});
 </script>
 
 <style lang="scss" scoped>

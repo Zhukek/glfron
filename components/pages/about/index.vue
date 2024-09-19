@@ -5,7 +5,7 @@
       <div class="capacities-left">
         <div class="capacities-left-factory">
           <div class="capacities-left-factory-p antique">
-            Select a factory on the map or click on any name
+            {{ hint }}
           </div>
 
           <ul class="capacities-left-factory-list">
@@ -26,8 +26,8 @@
           <div class="capacities-left-info-left">
             <img
               class="capacities-left-info-img"
-              :src="activeFactory.img"
-              :alt="activeFactory.name"
+              :src="factoriesList[activeFactoryIndex].img"
+              :alt="factoriesList[activeFactoryIndex].name"
             />
           </div>
           <div class="capacities-left-info-right">
@@ -38,28 +38,28 @@
                   src="@/assets/imgs/drop.svg"
                 />
                 <div class="capacities-left-info-name-text pre-line caption">
-                  {{ activeFactory.text }}
+                  {{ factoriesList[activeFactoryIndex].text }}
                 </div>
               </div>
               <div class="capacities-left-info-text grotesk">
-                {{ activeFactory.description }}
+                {{ factoriesList[activeFactoryIndex].description }}
               </div>
             </div>
 
             <div class="capacities-left-info-owner">
-              <h6 class="capacities-left-info-owner-title caption">
-                The owner of the <br />factory
+              <h6 class="capacities-left-info-owner-title pre-line caption">
+                {{ captionAboveOwnerPhoto }}
               </h6>
               <img
                 class="capacities-left-info-owner-img"
-                :src="activeFactory.owner.img"
-                :alt="activeFactory.owner.name"
+                :src="factoriesList[activeFactoryIndex].owner.img"
+                :alt="factoriesList[activeFactoryIndex].owner.name"
               />
               <p class="capacities-left-info-owner-name grotesk">
-                {{ activeFactory.owner.name }}
+                {{ factoriesList[activeFactoryIndex].owner.name }}
               </p>
               <p class="capacities-left-info-owner-text antique">
-                {{ activeFactory.owner.description }}
+                {{ factoriesList[activeFactoryIndex].owner.description }}
               </p>
             </div>
           </div>
@@ -165,7 +165,7 @@
               </div>
               <div class="capacities__accordion-item-owner">
                 <div class="capacities__accordion-item-owner-title caption">
-                  The owner of the factory
+                  {{ captionAboveOwnerPhoto }}
                 </div>
                 <img
                   class="capacities__accordion-item-owner-img"
@@ -191,91 +191,50 @@ import Marker from "@/components/common/marker/index.vue";
 import { GoogleMap, CustomMarker } from "vue3-google-map";
 import cusomization from "@/assets/aboutMap.json";
 const accordionItemContent = ref();
-const config = useRuntimeConfig();
-const apiKey = config.public.maps;
+
 onMounted(() => {
   changeFactoryActiveIndex(0);
   accordionItemContent.value.forEach((item, index) => {
-    factoriesList[index].height = pxToVw(item.scrollHeight) + 5.33;
+    factoriesList.value[index].height = pxToVw(item.scrollHeight) + 5.33;
   });
 });
-
-import ownerEvripidis from "@/assets/imgs/factories/factoryowner.webp";
-import ownerChatzigeorgiou from "@/assets/imgs/families/chatzigeorgiou.webp";
-import ownerVoutaktakis from "@/assets/imgs/families/voutaktakis.webp";
-
-import factoryEvripidis from "@/assets/imgs/factories/factoryEvripidis.webp";
-import factoryChatzigeorgiou from "@/assets/imgs/factories/factoryChatzigeorgiou.webp";
-import factoryVoutaktakis from "@/assets/imgs/factories/factoryVoutaktakis.webp";
-
-const factoriesList = reactive([
-  {
-    text: "Voutaktakis Giannis \nOlive oil Mil",
-    isActive: false,
-    isOpen: false,
-    type: "Olive pressing",
-    option: { position: { lat: 35.096, lng: 25.198667 } },
-    description:
-      "Since 1995, we have been primarily producing olive oil for ourselves and our family, infusing it with love for our craft and respect for traditions.",
-    img: factoryVoutaktakis,
-    owner: {
-      img: ownerVoutaktakis,
-      name: "Voutaktakis Giannis",
-      description:
-        "We use only traditional methods, including cold pressing, without the use of hot water and chemicals.",
-    },
+const props = defineProps({
+  hint: {
+    type: String,
+    required: true,
   },
-  {
-    text: "P. CHATZIGEORGIOU O.E. Olive oil mil",
-    isActive: false,
-    isOpen: false,
-    type: "Olive pressing",
-    option: { position: { lat: 35.276228, lng: 25.272519 } },
-    description:
-      "My family has been involved in olive oil production since 1926. It's a tradition and experience passed down from generation to generation.",
-    img: factoryChatzigeorgiou,
-    owner: {
-      img: ownerChatzigeorgiou,
-      name: "Chatzigeorgiou Dimos",
-      description:
-        "Our traditions include passing practices from father to son, and we're now the third generation producing olive oil.",
-    },
+  factoriesListProp: {
+    type: Array,
+    required: true,
   },
-  {
-    text: "THE EVRIPIDIS \nCOMPANY S.A.",
-    isActive: false,
-    isOpen: false,
-    type: "Olive oil Bottling",
-    option: { position: { lat: 35.01163885867966, lng: 24.933141195290414 } },
-    description:
-      "Established in 1969, the company underwent major changes, including a name change to EVRIPIDIS S.A.",
-    img: factoryEvripidis,
-    owner: {
-      img: ownerEvripidis,
-      name: "Manolis Melabianakis",
-      description:
-        "For thousands of years, Crete has been known as a garden full of delicious fruits, vegetables and one of the finest olive oils in the world.",
-    },
+  apiKey: {
+    type: String,
+    required: true,
   },
-]);
+  captionAboveOwnerPhoto: {
+    type: String,
+    required: true,
+  },
+});
+const factoriesList = ref(props.factoriesListProp);
 const factoryButtonActive = ref("Olive pressing");
-const factoriesButtons = ["Olive pressing", "Olive oil Bottling"];
-const activeFactory = ref(factoriesList[0]);
+const factoriesButtons = ["Olive pressing", "Olive oil bottling"];
+const activeFactoryIndex = ref(0);
 function changeFactoryActiveIndex(index) {
-  factoriesList.forEach((item) => {
+  factoriesList.value.forEach((item) => {
     item.isActive = false;
   });
-  factoriesList[index].isActive = true;
-  if (factoriesList[index].type === "Olive pressing") {
+  factoriesList.value[index].isActive = true;
+  if (factoriesList.value[index].type === "Olive pressing") {
     factoryButtonActive.value = "Olive pressing";
   } else {
-    factoryButtonActive.value = "Olive oil Bottling";
+    factoryButtonActive.value = "Olive oil bottling";
   }
-  activeFactory.value = factoriesList[index];
+  activeFactoryIndex.value = index;
 }
 
 function openFactory(index) {
-  factoriesList[index].isOpen = !factoriesList[index].isOpen;
+  factoriesList.value[index].isOpen = !factoriesList.value[index].isOpen;
 }
 </script>
 <style lang="scss" scoped>
