@@ -16,31 +16,27 @@ export default defineNuxtConfig({
     },
   },
 
-  //   i18n: {
-  //     locales: [
-  //       {
-  //         code: "en",
-  //         iso: "en-US",
-  //         name: "English",
-  //         file: "en-US.js",
-  //       },
-  //       {
-  //         code: "ru",
-  //         iso: "ru-RU",
-  //         name: "Русский",
-  //         file: "ru-RU.js",
-  //       },
-  //     ],
-  //     lazy: true,
-  //     langDir: "locales",
-  //     strategy: "no_prefix",
-  //     defaultLocale: "ru",
-  //     detectBrowserLanguage: {
-  //       useCookie: true,
-  //       cookieKey: "i18n_redirected",
-  //       redirectOn: "root",
-  //     },
-  //   },
+  i18n: {
+    locales: [
+      {
+        code: "en",
+        iso: "en-US",
+        name: "English",
+      },
+      {
+        code: "ru",
+        iso: "ru-RU",
+        name: "Русский",
+      },
+    ],
+    strategy: "prefix",
+    defaultLocale: "en",
+    //detectBrowserLanguage: {
+    //  useCookie: true,
+    //  cookieKey: "i18n_redirected",
+    //  redirectOn: "root",
+    //},
+  },
   app: {
     head: {
       title: "Greek Legend | Extra Virgin Olive Oil",

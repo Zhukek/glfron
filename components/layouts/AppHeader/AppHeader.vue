@@ -33,7 +33,7 @@
           }"
           v-if="headerStateStore.getIsLogoShow || isHeaderOpen"
         >
-          <nuxt-link to="/">
+          <nuxt-link :to="localePath('/')">
             <smallLogo class="header__logo-img" :color="getLogoColor" />
           </nuxt-link>
         </div>
@@ -51,6 +51,9 @@
     >
       {{ temperature }}
     </div>
+    <nuxt-link v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
+      {{ locale.code }}
+    </nuxt-link>
   </header>
   <Transition name="header" @enter="onEnter" @leave="onEnter">
     <div class="header__open" v-show="isHeaderOpen">
@@ -86,7 +89,7 @@
                   <nuxt-link
                     class="header__open-menu-el-list-item-link"
                     v-if="!item.isDisable"
-                    :to="item.link"
+                    :to="localePath(item.link)"
                   >
                     {{ item.text }}
                   </nuxt-link>
@@ -117,6 +120,15 @@ import { useHeaderStateStore } from "~/stores/headerState";
 const headerStateStore = useHeaderStateStore();
 import { useIsDesktopStore } from "~/stores/isDesktop";
 const isDesktopStore = useIsDesktopStore();
+
+//I18 locales//
+
+const { locale, locales } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+
+const availableLocales = computed(() => {
+  return locales.value.filter(i => i.code !== locale.value)
+})
 
 // Header settings (color, position) //
 const isHeaderShow = ref(true);

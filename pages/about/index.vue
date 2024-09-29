@@ -174,7 +174,7 @@
           </div>
           <div class="products__right-families">
             <router-link
-              :to="family.link"
+              :to="localePath(family.link)"
               class="products__right-families-family h1"
               :class="{
                 'products__right-families-family-active':
@@ -217,7 +217,7 @@
               />
               <nuxt-link
                 :title="family.name"
-                :to="family.link"
+                :to="localePath(family.link)"
                 class="products__families-block-title h1"
               >
                 {{ family.name }}

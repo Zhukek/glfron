@@ -7,18 +7,18 @@
       Page not found
     </h1>
     <div class="error__table">
-      <nuxt-link class="error__table-item grotesk" to="/" title="Main page"
+      <nuxt-link class="error__table-item grotesk" :to="localePath('/')" title="Main page"
         >Main page</nuxt-link
       >
       <nuxt-link
         class="error__table-item grotesk"
-        to="/about"
+        :to="localePath('/about')"
         title="About company"
         >About company</nuxt-link
       >
       <nuxt-link
         class="error__table-item grotesk"
-        to="/contacts"
+        :to="localePath('/contacts')"
         title="Contacts"
         >Contacts</nuxt-link
       >

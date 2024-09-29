@@ -23,7 +23,7 @@
           </p>
           <nuxt-link
             title="About"
-            to="/about"
+            :to="localePath('/about')"
             class="about__right-link link underline"
           >
             {{ linkText }}

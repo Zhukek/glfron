@@ -138,7 +138,7 @@
           <nuxt-link
             v-for="(farmer, index) in farmers"
             :key="index"
-            :to="farmer.link"
+            :to="localePath(farmer.link)"
             class="final__left-list-farmer link underline"
             :title="farmer.name"
             >{{ farmer.name }}</nuxt-link

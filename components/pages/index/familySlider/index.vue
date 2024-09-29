@@ -24,7 +24,7 @@
           {{ family.text }}
         </div>
         <div class="families__content-mobile-block-link link underline">
-          <nuxt-link :title="family.name" :to="family.link"
+          <nuxt-link :title="family.name" :to="localePath(family.link)"
             >Go family page</nuxt-link
           >
         </div>
@@ -53,7 +53,7 @@
           </p>
           <nuxt-link
             class="families__right-link link underline"
-            :to="families[activeIndex].link"
+            :to="localePath(families[activeIndex].link)"
             :title="families[activeIndex].name"
             >Go family page</nuxt-link
           >
