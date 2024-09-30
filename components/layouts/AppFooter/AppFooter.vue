@@ -127,14 +127,14 @@ const { data } = await useAsyncData("footer", () =>
     watch: [locale]
   }
 );
-const response = data.value.data.attributes;
+const response = toRef(() => data.value.data.attributes);
 
-const subtitle = response.subtitle;
-const emailHint = response.emailHint;
-const emailHintMobile = response.emailHintMobile;
-const officeAddress = response.officeAddress;
-const officeAddressLink = response.officeAddressLink;
-const copyright = response.copyright;
+const subtitle = toRef(() => response.value.subtitle);
+const emailHint = toRef(() => response.value.emailHint);
+const emailHintMobile = toRef(() => response.value.emailHintMobile);
+const officeAddress = toRef(() => response.value.officeAddress);
+const officeAddressLink = toRef(() => response.value.officeAddressLink);
+const copyright = toRef(() => response.value.copyright);
 
 // Subscribe //
 const email = ref("");

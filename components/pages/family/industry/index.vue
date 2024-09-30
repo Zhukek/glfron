@@ -101,14 +101,18 @@ function animationIndustry() {
   });
 }
 
+const { locale } = useI18n();
 const config = useRuntimeConfig();
 const API_ROUTE = config.public.api_route;
 const { data } = await useAsyncData("family-page-industry", () =>
-  $fetch(API_ROUTE + `/api/family-page-changing-the-industry?populate=deep`)
+  $fetch(API_ROUTE + `/api/family-page-changing-the-industry?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
-const response = data.value.data.attributes;
+const response = toRef(() => data.value.data.attributes);
 const industryList = [];
-response.slide.forEach((slide) => {
+response.value.slide.forEach((slide) => {
   const item = {
     title: slide.title,
     img: API_ROUTE + slide.background.data.attributes.url,

@@ -305,9 +305,13 @@ function handleScroll() {
 const config = useRuntimeConfig();
 const API_ROUTE = config.public.api_route;
 const apiKey = config.public.maps;
+const { locale } = useI18n(); 
 
 const { data } = await useAsyncData("about-page", () =>
-  $fetch(API_ROUTE + "/api/about-page?populate=deep")
+  $fetch(API_ROUTE + `/api/about-page?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
 const response = data.value.data.attributes;
 // FIRST SECTION //

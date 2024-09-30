@@ -28,6 +28,11 @@ export default defineNuxtConfig({
         iso: "ru-RU",
         name: "Русский",
       },
+      {
+        code: "pl",
+        iso: "pl-PL",
+        name: "Polski",
+      }
     ],
     strategy: "prefix",
     defaultLocale: "en",

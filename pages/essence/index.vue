@@ -166,6 +166,7 @@ import { useIsDesktopStore } from "@/stores/isDesktop";
 const isDesktopStore = useIsDesktopStore();
 
 const config = useRuntimeConfig();
+const { locale } = useI18n();
 const API_ROUTE = config.public.api_route;
 
 const accordionItemContent = ref();
@@ -176,7 +177,10 @@ const heightCulture = ref();
 const cardsContainer = ref();
 
 const { data } = await useAsyncData("essence-page", () =>
-  $fetch(API_ROUTE + `/api/essence?populate=deep`)
+  $fetch(API_ROUTE + `/api/essence?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
 const response = data.value.data.attributes;
 // HERO SECTION //
@@ -220,7 +224,10 @@ function openCultureItem(index) {
 
 // FINAL SECTION //
 const { data: dataFamily } = await useAsyncData("family-page-s", () =>
-  $fetch(API_ROUTE + `/api/family-pages?populate=deep`)
+  $fetch(API_ROUTE + `/api/family-pages?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
 const titleFinal = response.finalSection.title;
 const textAboveTitle = response.finalSection.textAboveTitle;
