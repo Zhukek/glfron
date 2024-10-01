@@ -163,12 +163,71 @@
   }
   &__temperature {
     transition: color $smooth;
+    margin-right: 25px;
+  }
+
+  &__language {
+    top: 60px;
+    right: 20px;
+    height: auto;
+    width: 232px;
+    z-index: 9;
+    position: fixed;
+    background-color: $white;
+    border-radius: 18px;
+    max-height: 100dvh;
+    filter: drop-shadow(0 0 2px rgb(227, 211, 215));
+
+    @media (max-width: $media) {
+      top: 0;
+      right: 0;
+      width: 100vw;
+      height: 100dvh;
+      border-radius: 0;
+      filter: none;
+    }
+
+    &-list {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 25px;
+      row-gap: 20px;
+
+      @media (max-width: $media) {
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &-item {
+      font-weight: 400;
+      font-size: 16px;
+
+      @media (max-width: $media) {
+        font-size: 30px;
+        font-family: 'ArnoPro';
+      }
+    }
   }
 
   &__menu {
     transition: color $smooth;
     cursor: pointer;
     position: relative;
+
+    &-language {
+      transition: color $smooth;
+      cursor: pointer;
+      position: relative;
+      text-transform: capitalize;
+    }
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
   &__logo {
     transition: opacity $smooth;
@@ -201,6 +260,17 @@
 .header-leave-active {
   transition: transform 1s cubic-bezier(1, 0, 0.34, 1);
 }
+
+.language-enter-from,
+.language-leave-to {
+  transform: translateY(-100vh);
+}
+
+.language-enter-active,
+.language-leave-active {
+  transition: transform 1s cubic-bezier(1, 0, 0.34, 1);
+}
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity $smoother ease-in-out;

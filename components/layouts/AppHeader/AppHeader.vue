@@ -40,20 +40,31 @@
       </Transition>
     </template>
 
-    <div
-      class="header__temperature link desktop"
-      :class="{
-        white: isWhite,
-        black: !isWhite || isHeaderOpen,
-        link: isDesktopStore.getIsDesktop,
-      }"
-      v-if="temperatureCelsius"
-    >
-      {{ temperature }}
+    <div class="header__wrapper">
+      <div
+        class="header__temperature link desktop"
+        :class="{
+          white: isWhite,
+          black: !isWhite || isHeaderOpen,
+          link: isDesktopStore.getIsDesktop,
+        }"
+        v-if="temperatureCelsius"
+      >
+        {{ temperature }}
+      </div>
+      <button
+        type="button"
+        class="header__menu-language"
+        :class="{
+          white: isWhite,
+          black: !isWhite || isHeaderOpen,
+          link: isDesktopStore.getIsDesktop,
+        }"
+        @click="openLanguage"
+      >
+        {{ isDesktop ? "Language" : locale}}
+      </button>
     </div>
-    <nuxt-link v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
-      {{ locale.code }}
-    </nuxt-link>
   </header>
   <Transition name="header" @enter="onEnter" @leave="onEnter">
     <div class="header__open" v-show="isHeaderOpen">
@@ -110,6 +121,23 @@
       </Transition>
     </div>
   </Transition>
+
+  <Transition name="language" @enter="onEnter" @leave="onEnter">
+    <div class="header__language" v-show="isLanguageOpen">
+      <Transition @after-enter="onAfterEnter" @after-leave="onAfterEnter">
+        <div class="header__language-list" v-if="isLanguageOpen">
+          <nuxt-link
+            v-for="locale in availableLocales"
+            :key="locale.code"
+            :to="switchLocalePath(locale.code)"
+            class="header__language-item"
+          >
+            {{ locale.name }}
+          </nuxt-link>
+        </div>
+      </Transition>
+    </div>
+  </Transition>
 </template>
 
 <script setup>
@@ -121,19 +149,12 @@ const headerStateStore = useHeaderStateStore();
 import { useIsDesktopStore } from "~/stores/isDesktop";
 const isDesktopStore = useIsDesktopStore();
 
-//I18 locales//
-
-const { locale, locales } = useI18n()
-const switchLocalePath = useSwitchLocalePath()
-
-const availableLocales = computed(() => {
-  return locales.value.filter(i => i.code !== locale.value)
-})
-
 // Header settings (color, position) //
 const isHeaderShow = ref(true);
 const isWhite = computed(() => headerStateStore.getIsColorWhite);
 const isHeaderOpen = computed(() => headerStateStore.getIsOpen);
+const isLanguageOpen = computed(() => headerStateStore.getIsLanguageOpen);
+const isDesktop = computed(() => isDesktopStore.getIsDesktop);
 const lastScroll = ref(0);
 const scrollPosition = () =>
   window.pageYOffset || document.documentElement.scrollTop;
@@ -182,6 +203,16 @@ function openMenu() {
     headerStateStore.openHeader();
   }
 }
+function openLanguage() {
+  if (isButtonDisable.value) {
+    return;
+  }
+  if (headerStateStore.getIsLanguageOpen) {
+    headerStateStore.closeLanguage();
+  } else {
+    headerStateStore.openLanguage();
+  }
+}
 const getHeaderMenu = computed(() => {
   return isHeaderOpen.value ? "Close menu" : "Menu";
 });
@@ -192,6 +223,21 @@ const API_ROUTE = config.public.api_route;
 const { data: dataHeader } = await useAsyncData("header-menu", () =>
   $fetch(API_ROUTE + "/api/header-menu?populate=deep")
 );
+
+//I18 locales//
+
+const { locale, locales } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+
+const availableLocales = computed(() => {
+  return locales.value.filter(i => i.code !== locale.value);
+})
+
+watch(locale, () => {
+  if (headerStateStore.getIsLanguageOpen) {
+    headerStateStore.closeLanguage();
+  }
+})
 
 // MENU ITEMS //
 const response = dataHeader.value.data.attributes;

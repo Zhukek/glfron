@@ -32,6 +32,26 @@ export default defineNuxtConfig({
         code: "pl",
         iso: "pl-PL",
         name: "Polski",
+      },
+      {
+        code: "kk",
+        iso: "kk-KZ",
+        name: "Kazakh",
+      },
+      {
+        code: "zh",
+        iso: "zh-CN",
+        name: "Chinese",
+      },
+      {
+        code: "de",
+        iso: "de-DE",
+        name: "Deutsch",
+      },
+      {
+        code: "el",
+        iso: "el-GR",
+        name: "Ελληνική",
       }
     ],
     strategy: "prefix",
