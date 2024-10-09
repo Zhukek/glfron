@@ -59,11 +59,15 @@ const headerStateStore = useHeaderStateStore();
 const center = ref({ lat: 35.091402, lng: 25.161928 });
 
 const config = useRuntimeConfig();
+const { locale } = useI18n();
 const apiKey = config.public.maps;
 const API_ROUTE = config.public.api_route;
 
 const { data } = await useAsyncData("contacts-page", () =>
-  $fetch(API_ROUTE + "/api/contact?populate=deep")
+  $fetch(API_ROUTE + `/api/contact?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
 const response = data.value.data.attributes;
 const markers = [{ position: { lat: 35.091402, lng: 25.161928 } }];

@@ -23,7 +23,7 @@
           </p>
           <nuxt-link
             title="About"
-            to="/about"
+            :to="localePath('/about')"
             class="about__right-link link underline"
           >
             {{ linkText }}
@@ -98,9 +98,13 @@ onMounted(() => {
 });
 const config = useRuntimeConfig();
 const API_ROUTE = config.public.api_route;
+const { locale } = useI18n(); 
 
 const { data } = await useAsyncData("main-page", () =>
-  $fetch(API_ROUTE + "/api/main-page?populate=deep")
+  $fetch(API_ROUTE + `/api/main-page?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
 const response = data.value.data.attributes;
 // FIRST SECTION

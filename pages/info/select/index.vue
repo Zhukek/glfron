@@ -40,7 +40,7 @@
           <nuxt-link
             class="certificates__wrapper-list-item-btn caption"
             v-if="certificate.ancor"
-            :to="certificate.link + '#' + certificate.ancor"
+            :to="localePath(certificate.link + '#' + certificate.ancor)"
             title="Read more about certification"
             >Read more about certification
           </nuxt-link>

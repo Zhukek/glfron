@@ -278,6 +278,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 
 const config = useRuntimeConfig();
+const { locale } = useI18n();
 const API_ROUTE = config.public.api_route;
 
 const accordionItemContent = ref();
@@ -285,8 +286,11 @@ const accordionItemContent = ref();
 const { data } = await useAsyncData("family-page-" + route.params.family, () =>
   $fetch(
     API_ROUTE +
-      `/api/family-pages?filters[name][$eqi]=${route.params.family}&populate=deep`
-  )
+      `/api/family-pages?filters[name][$eqi]=${route.params.family}&populate=deep&locale=${locale.value}`
+  ),
+  {
+    watch: [locale]
+  }
 );
 const response = data.value.data[0]?.attributes;
 if (!response) {
@@ -350,8 +354,10 @@ const { data: dataAccordion } = await useAsyncData(
   "family-page-" + route.params.family + "-accordion",
   () =>
     $fetch(
-      API_ROUTE + `/api/family-about-prodaction-right-column?populate=deep`
-    )
+      API_ROUTE + `/api/family-about-prodaction-right-column?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
 const responseAccordion = dataAccordion.value.data.attributes;
 const accordion = reactive([]);
@@ -373,7 +379,11 @@ function changeActiveOption(index) {
 // ACCREDITATION //
 const { data: dataAccreditation } = await useAsyncData(
   "family-page-" + route.params.family + "-accreditation",
-  () => $fetch(API_ROUTE + `/api/family-accreditation?populate=deep`)
+  () => $fetch(API_ROUTE + `/api/family-accreditation?populate=deep&locale=${locale.value}`,
+    {
+      watch: [locale]
+    }
+  )
 );
 const responseAccreditation =
   dataAccreditation.value.data.attributes.accreditationSection;

@@ -174,7 +174,7 @@
           </div>
           <div class="products__right-families">
             <router-link
-              :to="family.link"
+              :to="localePath(family.link)"
               class="products__right-families-family h1"
               :class="{
                 'products__right-families-family-active':
@@ -217,7 +217,7 @@
               />
               <nuxt-link
                 :title="family.name"
-                :to="family.link"
+                :to="localePath(family.link)"
                 class="products__families-block-title h1"
               >
                 {{ family.name }}
@@ -305,9 +305,13 @@ function handleScroll() {
 const config = useRuntimeConfig();
 const API_ROUTE = config.public.api_route;
 const apiKey = config.public.maps;
+const { locale } = useI18n(); 
 
 const { data } = await useAsyncData("about-page", () =>
-  $fetch(API_ROUTE + "/api/about-page?populate=deep")
+  $fetch(API_ROUTE + `/api/about-page?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
 const response = data.value.data.attributes;
 // FIRST SECTION //

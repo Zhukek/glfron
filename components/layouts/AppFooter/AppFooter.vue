@@ -79,7 +79,7 @@
         <h6 class="footer__block-h6 caption">Legend</h6>
         <p class="footer__block-p antique">
           {{ copyright }} <br />
-          <nuxt-link to="/privacy-policy" title="Privacy Policy">
+          <nuxt-link :to="localePath('/privacy-policy')" title="Privacy Policy">
             Privacy Policy
           </nuxt-link>
         </p>
@@ -115,22 +115,26 @@
 </template>
 <script setup>
 import { useIsDesktopStore } from "@/stores/isDesktop";
+const { locale } = useI18n();
 const isDesktopStore = useIsDesktopStore();
 
 const config = useRuntimeConfig();
 const API_ROUTE = config.public.api_route;
 
 const { data } = await useAsyncData("footer", () =>
-  $fetch(API_ROUTE + "/api/footer?populate=deep")
+  $fetch(API_ROUTE + `/api/footer?populate=deep&locale=${locale.value}`),
+  {
+    watch: [locale]
+  }
 );
-const response = data.value.data.attributes;
+const response = toRef(() => data.value.data.attributes);
 
-const subtitle = response.subtitle;
-const emailHint = response.emailHint;
-const emailHintMobile = response.emailHintMobile;
-const officeAddress = response.officeAddress;
-const officeAddressLink = response.officeAddressLink;
-const copyright = response.copyright;
+const subtitle = toRef(() => response.value.subtitle);
+const emailHint = toRef(() => response.value.emailHint);
+const emailHintMobile = toRef(() => response.value.emailHintMobile);
+const officeAddress = toRef(() => response.value.officeAddress);
+const officeAddressLink = toRef(() => response.value.officeAddressLink);
+const copyright = toRef(() => response.value.copyright);
 
 // Subscribe //
 const email = ref("");
