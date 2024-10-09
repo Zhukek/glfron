@@ -234,8 +234,6 @@ dataFamily.value.data.forEach((element) => {
 });
 
 onMounted(() => {
-  console.log(response);
-
   document.querySelectorAll(".card").forEach((card) => {
     gsap.to(card, {
       scrollTrigger: {
