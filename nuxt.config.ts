@@ -16,6 +16,10 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules: {
+    '/': { prerender: false },
+  },
+
   i18n: {
     locales: [
       {
@@ -37,11 +41,6 @@ export default defineNuxtConfig({
         code: "kk",
         iso: "kk-KZ",
         name: "Kazakh",
-      },
-      {
-        code: "zh",
-        iso: "zh-CN",
-        name: "Chinese",
       },
       {
         code: "de",
