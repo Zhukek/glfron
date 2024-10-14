@@ -233,11 +233,12 @@ const availableLocales = computed(() => {
   return locales.value.filter(i => i.code !== locale.value);
 })
 
-watch(locale, () => {
+watch(locale, (newLocale) => {
   if (headerStateStore.getIsLanguageOpen) {
     headerStateStore.closeLanguage();
   }
-  window.location.reload()
+  const path = switchLocalePath(newLocale);
+  window.location.href = path;
 })
 
 // MENU ITEMS //
