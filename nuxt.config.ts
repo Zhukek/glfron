@@ -16,10 +16,6 @@ export default defineNuxtConfig({
     },
   },
 
-  routeRules: {
-    '/': { prerender: false },
-  },
-
   i18n: {
     locales: [
       {
@@ -53,7 +49,7 @@ export default defineNuxtConfig({
         name: "Ελληνική",
       }
     ],
-    strategy: "prefix",
+    strategy: "prefix_except_default",
     defaultLocale: "en",
     //detectBrowserLanguage: {
     //  useCookie: true,
