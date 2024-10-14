@@ -237,6 +237,7 @@ watch(locale, () => {
   if (headerStateStore.getIsLanguageOpen) {
     headerStateStore.closeLanguage();
   }
+  window.location.reload()
 })
 
 // MENU ITEMS //
