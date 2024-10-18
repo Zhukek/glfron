@@ -46,7 +46,7 @@ export default defineNuxtConfig({
       {
         code: "el",
         iso: "el-GR",
-        name: "Ελληνική",
+        name: "Ελληνικά",
       }
     ],
     strategy: "prefix_except_default",
