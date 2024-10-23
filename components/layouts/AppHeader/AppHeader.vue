@@ -238,7 +238,7 @@ watch(locale, (newLocale) => {
     headerStateStore.closeLanguage();
   }
   const path = switchLocalePath(newLocale);
-  window.location.href = path;
+  window.location.replace = path;
 })
 
 // MENU ITEMS //
