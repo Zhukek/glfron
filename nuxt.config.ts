@@ -47,7 +47,7 @@ export default defineNuxtConfig({
         code: "el",
         iso: "el-GR",
         name: "Ελληνικά",
-      }
+      },
     ],
     strategy: "prefix_except_default",
     defaultLocale: "en",
@@ -55,6 +55,7 @@ export default defineNuxtConfig({
       useCookie: true,
       cookieKey: "i18n_redirected",
       redirectOn: "root",
+      alwaysRedirect: true,
     },
   },
   app: {

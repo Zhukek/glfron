@@ -1,7 +1,6 @@
 <template>
   <div id="root">
     <AppHeader />
-    <!-- <Preloader /> -->
     <NuxtPage />
     <AppFooter v-if="!isFooterShow" />
   </div>
@@ -10,7 +9,6 @@
 <script setup>
 import AppFooter from "@/components/layouts/AppFooter/AppFooter.vue";
 import AppHeader from "@/components/layouts/AppHeader/AppHeader.vue";
-// import Preloader from "@/components/layouts/Preloader/index.vue";
 import Lenis from "@studio-freight/lenis";
 import { useIsPopupOpen } from "@/stores/isPopupOpen";
 const isPopupOpenStore = useIsPopupOpen();
